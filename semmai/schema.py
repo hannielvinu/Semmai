@@ -24,6 +24,8 @@ class Column:
     type: str                     # int | real | text | date
     synonyms: list = field(default_factory=list)
     values: list = field(default_factory=list)   # distinct values (categorical text columns)
+    min: object = None
+    max: object = None
 
     @property
     def full(self) -> str:
@@ -87,6 +89,8 @@ class Schema:
                     typ = _type_of(ctype, cl)
                     syn = tmeta.get("cols", {}).get(cl) or _auto_synonyms(cl)
                     col = Column(tl, cl, typ, list(syn))
+                    if typ in ("int", "real", "date"):
+                        col.min, col.max = con.execute(f'SELECT MIN("{cname}"), MAX("{cname}") FROM "{t}"').fetchone()
                     if typ == "text":
                         n = con.execute(f'SELECT COUNT(DISTINCT "{cname}") FROM "{t}"').fetchone()[0]
                         if 0 < n <= max_categorical:
