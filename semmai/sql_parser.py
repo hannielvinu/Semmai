@@ -456,7 +456,7 @@ def render_sql(g: USIG, schema: Schema, aliases: bool = False, between: bool = F
     having = [p for p, c in zip(parts, [c for i, c in enumerate(conds) if i not in used]) if "(" in c.column]
     where = [p for p in parts if p not in having]
     if where:
-        sql += " WHERE " + " AND ".join(where)
+        sql += " WHERE " + (" OR " if g.has_or else " AND ").join(where)
     if g.group_by:
         sql += " GROUP BY " + ", ".join(col(c) for c in g.group_by)
     if having:
