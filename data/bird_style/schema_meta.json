@@ -1,0 +1,494 @@
+{
+  "hospital": {
+    "patients": {
+      "noun": [
+        "patient",
+        "patients"
+      ],
+      "name_col": "name",
+      "cols": {
+        "name": [
+          "name",
+          "names"
+        ],
+        "age": [
+          "age",
+          "aged",
+          "years old",
+          "old"
+        ],
+        "gender": [
+          "gender",
+          "sex"
+        ],
+        "city": [
+          "city",
+          "lives",
+          "living",
+          "from"
+        ],
+        "blood_group": [
+          "blood group",
+          "blood type"
+        ],
+        "ward": [
+          "ward"
+        ],
+        "admission_date": [
+          "admitted",
+          "admission",
+          "admission date"
+        ],
+        "bill_amount": [
+          "bill",
+          "bill amount",
+          "billed",
+          "hospital bill"
+        ]
+      }
+    },
+    "doctors": {
+      "noun": [
+        "doctor",
+        "doctors",
+        "physician",
+        "physicians"
+      ],
+      "name_col": "name",
+      "cols": {
+        "name": [
+          "name",
+          "names"
+        ],
+        "specialty": [
+          "specialty",
+          "speciality",
+          "specialization"
+        ],
+        "experience_years": [
+          "experience",
+          "years of experience",
+          "experienced"
+        ],
+        "city": [
+          "city",
+          "practising",
+          "practicing",
+          "based"
+        ],
+        "consultation_fee": [
+          "consultation fee",
+          "fee",
+          "charge",
+          "charges"
+        ]
+      }
+    },
+    "appointments": {
+      "noun": [
+        "appointment",
+        "appointments",
+        "visit",
+        "visits"
+      ],
+      "name_col": "appointment_id",
+      "cols": {
+        "appointment_date": [
+          "appointment date",
+          "scheduled",
+          "booked"
+        ],
+        "status": [
+          "status"
+        ],
+        "fee": [
+          "fee",
+          "fees",
+          "paid"
+        ]
+      }
+    }
+  },
+  "retail": {
+    "customers": {
+      "noun": [
+        "customer",
+        "customers",
+        "shopper",
+        "shoppers",
+        "buyer",
+        "buyers"
+      ],
+      "name_col": "name",
+      "cols": {
+        "name": [
+          "name",
+          "names"
+        ],
+        "age": [
+          "age",
+          "aged",
+          "years old",
+          "old"
+        ],
+        "city": [
+          "city",
+          "from",
+          "living",
+          "located"
+        ],
+        "loyalty_tier": [
+          "loyalty tier",
+          "tier",
+          "membership",
+          "loyalty"
+        ],
+        "join_date": [
+          "joined",
+          "join date",
+          "signed up",
+          "registered"
+        ]
+      }
+    },
+    "products": {
+      "noun": [
+        "product",
+        "products",
+        "item",
+        "items"
+      ],
+      "name_col": "name",
+      "cols": {
+        "name": [
+          "name",
+          "names"
+        ],
+        "category": [
+          "category"
+        ],
+        "price": [
+          "price",
+          "priced",
+          "cost",
+          "costing",
+          "costs",
+          "expensive",
+          "cheap"
+        ],
+        "stock": [
+          "stock",
+          "units in stock",
+          "inventory",
+          "units"
+        ],
+        "rating": [
+          "rating",
+          "rated",
+          "stars"
+        ]
+      }
+    },
+    "orders": {
+      "noun": [
+        "order",
+        "orders",
+        "purchase",
+        "purchases"
+      ],
+      "name_col": "order_id",
+      "cols": {
+        "order_date": [
+          "ordered",
+          "order date",
+          "placed"
+        ],
+        "amount": [
+          "amount",
+          "purchases",
+          "purchase",
+          "worth",
+          "value",
+          "spent",
+          "order value"
+        ],
+        "payment_method": [
+          "payment method",
+          "paid via",
+          "paid using",
+          "payment"
+        ],
+        "status": [
+          "status"
+        ]
+      }
+    }
+  },
+  "university": {
+    "students": {
+      "noun": [
+        "student",
+        "students"
+      ],
+      "name_col": "name",
+      "cols": {
+        "name": [
+          "name",
+          "names"
+        ],
+        "department": [
+          "department",
+          "branch",
+          "dept"
+        ],
+        "year_of_study": [
+          "year of study",
+          "study year"
+        ],
+        "cgpa": [
+          "cgpa",
+          "gpa",
+          "grade point"
+        ],
+        "city": [
+          "city",
+          "hometown",
+          "from"
+        ],
+        "enrollment_date": [
+          "enrolled",
+          "enrollment date",
+          "admitted"
+        ],
+        "age": [
+          "age",
+          "aged",
+          "years old",
+          "old"
+        ]
+      }
+    },
+    "courses": {
+      "noun": [
+        "course",
+        "courses",
+        "subject",
+        "subjects"
+      ],
+      "name_col": "title",
+      "cols": {
+        "title": [
+          "title",
+          "titles",
+          "name",
+          "names"
+        ],
+        "department": [
+          "department",
+          "offered by"
+        ],
+        "credits": [
+          "credits",
+          "credit",
+          "credit hours"
+        ]
+      }
+    },
+    "enrollments": {
+      "noun": [
+        "enrollment",
+        "enrollments",
+        "registration",
+        "registrations"
+      ],
+      "name_col": "enrollment_id",
+      "cols": {
+        "semester": [
+          "semester",
+          "term"
+        ],
+        "marks": [
+          "marks",
+          "score",
+          "scored",
+          "mark"
+        ]
+      }
+    }
+  },
+  "finance": {
+    "accounts": {
+      "noun": [
+        "account",
+        "accounts",
+        "account holder",
+        "account holders"
+      ],
+      "name_col": "holder_name",
+      "cols": {
+        "holder_name": [
+          "holder name",
+          "holder",
+          "name",
+          "names"
+        ],
+        "branch": [
+          "branch",
+          "city",
+          "from"
+        ],
+        "account_type": [
+          "account type",
+          "type"
+        ],
+        "balance": [
+          "balance",
+          "deposit",
+          "funds"
+        ],
+        "opened_date": [
+          "opened",
+          "open date",
+          "created"
+        ],
+        "holder_age": [
+          "age",
+          "aged",
+          "years old",
+          "old"
+        ]
+      }
+    },
+    "transactions": {
+      "noun": [
+        "transaction",
+        "transactions",
+        "payment",
+        "payments",
+        "transfer",
+        "transfers"
+      ],
+      "name_col": "transaction_id",
+      "cols": {
+        "transaction_date": [
+          "transaction date",
+          "made",
+          "done"
+        ],
+        "amount": [
+          "amount",
+          "worth",
+          "value"
+        ],
+        "transaction_type": [
+          "transaction type",
+          "type"
+        ],
+        "channel": [
+          "channel",
+          "via",
+          "through",
+          "using"
+        ]
+      }
+    }
+  },
+  "travel": {
+    "flights": {
+      "noun": [
+        "flight",
+        "flights"
+      ],
+      "name_col": "flight_no",
+      "cols": {
+        "flight_no": [
+          "flight number",
+          "flight numbers",
+          "flight no"
+        ],
+        "airline": [
+          "airline",
+          "carrier",
+          "operated by"
+        ],
+        "origin": [
+          "origin",
+          "from",
+          "departing"
+        ],
+        "destination": [
+          "destination",
+          "to",
+          "arriving"
+        ],
+        "departure_date": [
+          "departure date",
+          "departing",
+          "departs",
+          "leaving",
+          "flying"
+        ],
+        "duration_minutes": [
+          "duration",
+          "minutes",
+          "long",
+          "flight time"
+        ],
+        "price": [
+          "price",
+          "fare",
+          "cost",
+          "costing",
+          "priced",
+          "ticket price"
+        ],
+        "seats_available": [
+          "seats available",
+          "available seats",
+          "seats",
+          "free seats"
+        ]
+      }
+    },
+    "bookings": {
+      "noun": [
+        "booking",
+        "bookings",
+        "passenger",
+        "passengers",
+        "reservation",
+        "reservations"
+      ],
+      "name_col": "passenger_name",
+      "cols": {
+        "passenger_name": [
+          "passenger name",
+          "name",
+          "names"
+        ],
+        "passenger_age": [
+          "age",
+          "aged",
+          "years old",
+          "old"
+        ],
+        "seat_class": [
+          "class",
+          "seat class",
+          "cabin"
+        ],
+        "booking_date": [
+          "booked",
+          "booking date",
+          "reserved"
+        ],
+        "amount": [
+          "amount",
+          "paid",
+          "fare paid",
+          "worth"
+        ]
+      }
+    }
+  }
+}
