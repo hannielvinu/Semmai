@@ -107,10 +107,12 @@ def build_pairs(records, values_by_loc_type, intent_slots, rng):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data", default=str(ROOT / "data/massive_style/massive_style.jsonl"))
+    ap.add_argument("--data", default=str(ROOT / "data/massive_style/massive_style.jsonl"),
+                    help="Semmai jsonl file, or the official MASSIVE 1.1 'data' folder")
+    ap.add_argument("--locales", default="en-US,ta-IN,hi-IN,fr-FR,es-ES,de-DE")
     args = ap.parse_args()
     rng = random.Random(5)
-    recs = load_massive(args.data)
+    recs = load_massive(args.data, set(args.locales.split(",")))
     train = [r for r in recs if r["partition"] == "train"]
     test = [r for r in recs if r["partition"] == "test"]
     values = defaultdict(set)

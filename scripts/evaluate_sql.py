@@ -51,6 +51,15 @@ NAMES = {"syntax_permission": "Syntax + permission check", "execution_nonempty":
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--pairs", default=None, help="pairs file built by build_verification_benchmark.py")
+    ap.add_argument("--bird-root", default=None, help="official BIRD dev folder (with dev_databases/)")
+    ap.add_argument("--out-prefix", default="sql")
+    args = ap.parse_args()
+    global SETS
+    if args.pairs:
+        SETS = {"generated": Path(args.pairs)}
     RES.mkdir(exist_ok=True)
     sim = Similarity()
     print("similarity backend:", sim.backend)
@@ -58,7 +67,11 @@ def main():
 
     def ctx(db):
         if db not in schemas:
-            schemas[db] = Schema.from_bird_style(DATA, db)
+            if args.bird_root:
+                broot = Path(args.bird_root)
+                schemas[db] = Schema(db, broot / "dev_databases" / db / f"{db}.sqlite")
+            else:
+                schemas[db] = Schema.from_bird_style(DATA, db)
             verifiers[db] = SemmaiVerifier(schemas[db], similarity=sim, use_similarity=False)
             cons[db] = sqlite3.connect(schemas[db].db_path)
         return schemas[db], verifiers[db], cons[db]
@@ -112,7 +125,7 @@ def main():
     thresholds = {"similarity_sql": t_sql, "similarity_text": t_text, "semmai_gate": best_gate}
     from sklearn.metrics import roc_auc_score
     auc = {}
-    for nm in ("generated", "handwritten", "blind"):
+    for nm in SETS:
         rs = [r for r in rows if r["set"] == nm and (nm != "generated" or r["split"] == "test")]
         auc[nm] = {k: roc_auc_score([r["label"] for r in rs], [r[k] for r in rs]) for k in ("sim_sql", "sim_text")}
     print("thresholds (tuned on dev):", thresholds)
@@ -139,9 +152,10 @@ def main():
             r[f"allow_{m}"] = decide(r, m)
 
     # ---------------------------------------------------------- main tables
-    evalsets = {"generated_test": [r for r in rows if r["set"] == "generated" and r["split"] == "test"],
-                "handwritten": [r for r in rows if r["set"] == "handwritten"],
-                "blind": [r for r in rows if r["set"] == "blind"]}
+    evalsets = {"generated_test": [r for r in rows if r["set"] == "generated" and r["split"] == "test"]}
+    for nm in SETS:
+        if nm != "generated":
+            evalsets[nm] = [r for r in rows if r["set"] == nm]
     summary = {"similarity_backend": sim.backend, "thresholds": thresholds, "similarity_roc_auc": auc, "sets": {}}
     for name, rs in evalsets.items():
         summary["sets"][name] = {
@@ -155,7 +169,7 @@ def main():
 
     # per error type (detection rate) and per rewrite type (acceptance rate)
     per_type = defaultdict(dict)
-    test_like = evalsets["generated_test"] + evalsets["handwritten"] + evalsets["blind"]
+    test_like = [r for rs in evalsets.values() for r in rs]
     kinds = sorted({r["kind"] for r in test_like})
     for k in kinds:
         rs = [r for r in test_like if r["kind"] == k]
@@ -177,15 +191,15 @@ def main():
             per_diff[d]["n"] = len(rs)
     summary["per_difficulty"] = per_diff
 
-    (RES / "sql_results.json").write_text(json.dumps(summary, indent=2))
-    with open(RES / "sql_predictions.csv", "w", newline="", encoding="utf-8") as f:
+    (RES / f"{args.out_prefix}_results.json").write_text(json.dumps(summary, indent=2))
+    with open(RES / f"{args.out_prefix}_predictions.csv", "w", newline="", encoding="utf-8") as f:
         keys = ["set", "pair_id", "db_id", "split", "kind", "label", "difficulty", "exec_equal", "question", "sql",
                 "sim_text", "findings"] + [f"allow_{m}" for m in METHODS]
         w = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore")
         w.writeheader()
         for r in rows:
             w.writerow({**r, "sim_text": round(r["sim_text"], 4)})
-    with open(RES / "similarity_scores.csv", "w", newline="") as f:
+    with open(RES / f"{args.out_prefix}_similarity_scores.csv" if args.out_prefix != "sql" else RES / "similarity_scores.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["set", "label", "kind", "sim_text", "sim_sql"])
         for r in rows:
@@ -225,7 +239,7 @@ def main():
             md.append(f"| {k} | {p['n']} | {p['similarity_text']:.0%} | {p['semmai']:.0%} |")
     md += ["", f"Mean verification latency: {summary['latency_ms']['mean']:.2f} ms "
                f"(median {summary['latency_ms']['median']:.2f} ms, p95 {summary['latency_ms']['p95']:.2f} ms)."]
-    (RES / "sql_results.md").write_text("\n".join(md))
+    (RES / f"{args.out_prefix}_results.md").write_text("\n".join(md))
     print("\n".join(md))
 
 

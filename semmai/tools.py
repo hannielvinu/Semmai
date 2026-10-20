@@ -51,15 +51,25 @@ def parse_annot(annot: str) -> dict:
 
 
 def load_massive(path: str | Path, locales=None) -> list:
-    """Load MASSIVE-format jsonl (official MASSIVE 1.1 files or Semmai's generated set)."""
+    """Load MASSIVE-format jsonl: one file (Semmai's set) or a folder of per-locale
+    files (official MASSIVE 1.1: data/<locale>.jsonl)."""
+    path = Path(path)
+    if path.is_dir():
+        out = []
+        for f in sorted(path.glob("*.jsonl")):
+            if locales and f.stem not in locales:
+                continue
+            out.extend(load_massive(f, locales))
+        return out
     out = []
-    for line in Path(path).read_text(encoding="utf-8").splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
         r = json.loads(line)
         if locales and r["locale"] not in locales:
             continue
         r["slots"] = parse_annot(r.get("annot_utt", ""))
+        r.setdefault("template", int(r["id"]) % 3 if str(r["id"]).isdigit() else hash(r["id"]) % 3)
         out.append(r)
     return out
 
