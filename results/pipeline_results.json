@@ -1,0 +1,86 @@
+[
+  {
+    "error_rate": 0.1,
+    "n": 1035,
+    "baseline": {
+      "correct": 0.9024154589371981,
+      "wrong_executed": 0.09758454106280193,
+      "rejected": 0.0
+    },
+    "semmai_block": {
+      "correct": 0.885024154589372,
+      "wrong_executed": 0.0,
+      "rejected": 0.11497584541062802,
+      "false_rejections": 0.017391304347826087
+    },
+    "semmai_regen": {
+      "correct": 0.9806763285024155,
+      "wrong_executed": 0.0,
+      "rejected": 0.01932367149758454,
+      "mean_attempts": 1.1400966183574879
+    }
+  },
+  {
+    "error_rate": 0.2,
+    "n": 1035,
+    "baseline": {
+      "correct": 0.8077294685990338,
+      "wrong_executed": 0.19227053140096617,
+      "rejected": 0.0
+    },
+    "semmai_block": {
+      "correct": 0.7951690821256039,
+      "wrong_executed": 0.0,
+      "rejected": 0.20483091787439614,
+      "false_rejections": 0.012560386473429951
+    },
+    "semmai_regen": {
+      "correct": 0.9758454106280193,
+      "wrong_executed": 0.0,
+      "rejected": 0.024154589371980676,
+      "mean_attempts": 1.259903381642512
+    }
+  },
+  {
+    "error_rate": 0.3,
+    "n": 1035,
+    "baseline": {
+      "correct": 0.685024154589372,
+      "wrong_executed": 0.314975845410628,
+      "rejected": 0.0
+    },
+    "semmai_block": {
+      "correct": 0.6753623188405797,
+      "wrong_executed": 0.0,
+      "rejected": 0.32463768115942027,
+      "false_rejections": 0.00966183574879227
+    },
+    "semmai_regen": {
+      "correct": 0.9623188405797102,
+      "wrong_executed": 0.000966183574879227,
+      "rejected": 0.03671497584541063,
+      "mean_attempts": 1.4183574879227052
+    }
+  },
+  {
+    "error_rate": 0.4,
+    "n": 1035,
+    "baseline": {
+      "correct": 0.6270531400966184,
+      "wrong_executed": 0.37294685990338167,
+      "rejected": 0.0
+    },
+    "semmai_block": {
+      "correct": 0.6144927536231884,
+      "wrong_executed": 0.0,
+      "rejected": 0.3855072463768116,
+      "false_rejections": 0.012560386473429951
+    },
+    "semmai_regen": {
+      "correct": 0.923671497584541,
+      "wrong_executed": 0.001932367149758454,
+      "rejected": 0.07439613526570048,
+      "mean_attempts": 1.541062801932367
+    }
+  }
+]
