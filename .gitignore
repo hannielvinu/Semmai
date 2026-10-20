@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+.DS_Store
+*.egg-info/
+# official datasets are large; download them yourself (see data/README.md)
+data/official/
