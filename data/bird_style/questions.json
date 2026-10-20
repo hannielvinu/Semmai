@@ -1,0 +1,3413 @@
+[
+  {
+    "question_id": 0,
+    "db_id": "hospital",
+    "question": "Which doctors have consultation fee is exceeding 770 rupees?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE consultation_fee > 770",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 1,
+    "db_id": "hospital",
+    "question": "Show the names of doctors with more than 20 years of experience.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years > 20",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 2,
+    "db_id": "hospital",
+    "question": "Which doctors have more than 20 years of experience?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years > 20",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 3,
+    "db_id": "hospital",
+    "question": "Which doctors have at least 16 years of experience?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years >= 16",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 4,
+    "db_id": "hospital",
+    "question": "Give me doctors based in Salem.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city = 'Salem'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 5,
+    "db_id": "hospital",
+    "question": "Find patients with a bill amount of less than or equal to 190000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE bill_amount <= 190000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 6,
+    "db_id": "hospital",
+    "question": "Find all doctors whose specialty is Oncology",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE specialty = 'Oncology'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 7,
+    "db_id": "hospital",
+    "question": "List doctors based in Salem",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city = 'Salem'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 8,
+    "db_id": "hospital",
+    "question": "List the names of doctors with less than 25 years of experience",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years < 25",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 9,
+    "db_id": "hospital",
+    "question": "Which patients are in the Orthopedic ward?",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE ward = 'Orthopedic'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 10,
+    "db_id": "hospital",
+    "question": "Show me doctors with at most 17 years of experience",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years <= 17",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 11,
+    "db_id": "hospital",
+    "question": "Give me patients with blood group A+",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE blood_group = 'A+'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 12,
+    "db_id": "hospital",
+    "question": "Find patients aged 25 or older.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE age >= 25",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 13,
+    "db_id": "hospital",
+    "question": "Find patients with blood group B+.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE blood_group = 'B+'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 14,
+    "db_id": "hospital",
+    "question": "Give me doctors based in Chennai and with consultation fee not more than Rs. 760.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city = 'Chennai' AND consultation_fee <= 760",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 15,
+    "db_id": "hospital",
+    "question": "Show me patients admitted after 12 February 2024 and with a hospital bill of lower than ₹140,000.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE admission_date > '2024-02-12' AND bill_amount < 140000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 16,
+    "db_id": "hospital",
+    "question": "List the names of patients admitted since 2025-05-16 and with hospital bill INR 160000 or above",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE admission_date >= '2025-05-16' AND bill_amount >= 160000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 17,
+    "db_id": "hospital",
+    "question": "List the names of patients based in Pune and admitted on or after 20 April 2025.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE city = 'Pune' AND admission_date >= '2025-04-20'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 18,
+    "db_id": "hospital",
+    "question": "Show me doctors in the ENT department and based in Mumbai",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE specialty = 'ENT' AND city = 'Mumbai'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 19,
+    "db_id": "hospital",
+    "question": "Find doctors with more than 12 years of experience and with a consultation fee of below ₹1,800",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years > 12 AND consultation_fee < 1800",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 20,
+    "db_id": "hospital",
+    "question": "Find patients admitted since 24 July 2023 and at most 70 years old.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE admission_date >= '2023-07-24' AND age <= 70",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 21,
+    "db_id": "hospital",
+    "question": "Display patients aged 45 or above and with blood group AB-.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE age >= 45 AND blood_group = 'AB-'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 22,
+    "db_id": "hospital",
+    "question": "List all patients admitted on or before 2023-11-19 and aged 45 or older.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE admission_date <= '2023-11-19' AND age >= 45",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 23,
+    "db_id": "hospital",
+    "question": "List the names of patients younger than 18 and in the Cardiac ward",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE age < 18 AND ward = 'Cardiac'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 24,
+    "db_id": "hospital",
+    "question": "Which patients have blood group is not A+?",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE blood_group != 'A+'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 25,
+    "db_id": "hospital",
+    "question": "List patients outside the General ward",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE ward != 'General'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 26,
+    "db_id": "hospital",
+    "question": "List patients living outside Hyderabad.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE city != 'Hyderabad'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 27,
+    "db_id": "hospital",
+    "question": "Which doctors are not specialising in Orthopedics?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE specialty != 'Orthopedics'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 28,
+    "db_id": "hospital",
+    "question": "Show the names of patients not in the General ward.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE ward != 'General'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 29,
+    "db_id": "hospital",
+    "question": "Get doctors not based in Kolkata.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city != 'Kolkata'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 30,
+    "db_id": "hospital",
+    "question": "Show me doctors in the Pediatrics or Orthopedics department",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE specialty IN ('Pediatrics', 'Orthopedics')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 31,
+    "db_id": "hospital",
+    "question": "Get doctors practising in Delhi or Vellore.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city IN ('Delhi', 'Vellore')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 32,
+    "db_id": "hospital",
+    "question": "Display patients in the Pediatric or Maternity ward",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE ward IN ('Pediatric', 'Maternity')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 33,
+    "db_id": "hospital",
+    "question": "List the names of doctors based in Bengaluru or Delhi",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city IN ('Bengaluru', 'Delhi')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 34,
+    "db_id": "hospital",
+    "question": "List patients with hospital bill between Rs. 51,000 and 2 lakh rupees",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE bill_amount >= 51000 AND bill_amount <= 200000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 35,
+    "db_id": "hospital",
+    "question": "List all doctors whose consultation fee is between Rs. 730 and 2000 rupees",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE consultation_fee >= 730 AND consultation_fee <= 2000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 36,
+    "db_id": "hospital",
+    "question": "Which doctors have years of experience between 8 and 30?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE experience_years >= 8 AND experience_years <= 30",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 37,
+    "db_id": "hospital",
+    "question": "Show doctors with consultation fee between Rs. 1,100 and 2100 rupees.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE consultation_fee >= 1100 AND consultation_fee <= 2100",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 38,
+    "db_id": "hospital",
+    "question": "Give the total number of patients admitted before 2023.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM patients WHERE admission_date < '2023-01-01'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 39,
+    "db_id": "hospital",
+    "question": "Count the doctors having a consultation fee above 1,300.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM doctors WHERE consultation_fee > 1300",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 40,
+    "db_id": "hospital",
+    "question": "How many doctors with less than 12 years of experience are there?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM doctors WHERE experience_years < 12",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 41,
+    "db_id": "hospital",
+    "question": "How many doctors whose specialty is General Medicine are there?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM doctors WHERE specialty = 'General Medicine'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 42,
+    "db_id": "hospital",
+    "question": "Give the total number of patients living in Salem.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM patients WHERE city = 'Salem'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 43,
+    "db_id": "hospital",
+    "question": "What is the number of patients living in Vellore?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM patients WHERE city = 'Vellore'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 44,
+    "db_id": "hospital",
+    "question": "What is the number of patients admitted no later than December 26, 2025?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM patients WHERE admission_date <= '2025-12-26'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 45,
+    "db_id": "hospital",
+    "question": "Give the total number of doctors with at most 25 years of experience.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM doctors WHERE experience_years <= 25",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 46,
+    "db_id": "hospital",
+    "question": "Calculate the average age for patients admitted in 2023.",
+    "evidence": "",
+    "SQL": "SELECT AVG(age) FROM patients WHERE admission_date >= '2023-01-01' AND admission_date <= '2023-12-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 47,
+    "db_id": "hospital",
+    "question": "Calculate the total bill amount for patients with blood group A-.",
+    "evidence": "",
+    "SQL": "SELECT SUM(bill_amount) FROM patients WHERE blood_group = 'A-'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 48,
+    "db_id": "hospital",
+    "question": "Calculate the lowest consultation fee for doctors specialising in General Medicine.",
+    "evidence": "",
+    "SQL": "SELECT MIN(consultation_fee) FROM doctors WHERE specialty = 'General Medicine'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 49,
+    "db_id": "hospital",
+    "question": "What is the lowest consultation fee of doctors practising in Hyderabad?",
+    "evidence": "",
+    "SQL": "SELECT MIN(consultation_fee) FROM doctors WHERE city = 'Hyderabad'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 50,
+    "db_id": "hospital",
+    "question": "Calculate the total bill amount for patients admitted in August 2020.",
+    "evidence": "",
+    "SQL": "SELECT SUM(bill_amount) FROM patients WHERE admission_date >= '2020-08-01' AND admission_date <= '2020-08-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 51,
+    "db_id": "hospital",
+    "question": "Find the minimum age among patients admitted after 2023.",
+    "evidence": "",
+    "SQL": "SELECT MIN(age) FROM patients WHERE admission_date > '2023-12-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 52,
+    "db_id": "hospital",
+    "question": "Find the average bill amount among patients with blood group O+.",
+    "evidence": "",
+    "SQL": "SELECT AVG(bill_amount) FROM patients WHERE blood_group = 'O+'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 53,
+    "db_id": "hospital",
+    "question": "What is the average age of patients with blood group A+?",
+    "evidence": "",
+    "SQL": "SELECT AVG(age) FROM patients WHERE blood_group = 'A+'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 54,
+    "db_id": "hospital",
+    "question": "Show the 3 doctors practising in Chennai with the lowest years of experience.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city = 'Chennai' ORDER BY experience_years ASC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 55,
+    "db_id": "hospital",
+    "question": "Which 10 patients living in Kolkata have the lowest bill amount?",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE city = 'Kolkata' ORDER BY bill_amount ASC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 56,
+    "db_id": "hospital",
+    "question": "Which doctor practising in Chennai has the lowest years of experience?",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors WHERE city = 'Chennai' ORDER BY experience_years ASC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 57,
+    "db_id": "hospital",
+    "question": "Find the patient with blood group A- with the highest bill amount.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients WHERE blood_group = 'A-' ORDER BY bill_amount DESC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 58,
+    "db_id": "hospital",
+    "question": "Find the doctor with the highest years of experience.",
+    "evidence": "",
+    "SQL": "SELECT name FROM doctors ORDER BY experience_years DESC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 59,
+    "db_id": "hospital",
+    "question": "Show the 10 patients with the lowest age.",
+    "evidence": "",
+    "SQL": "SELECT name FROM patients ORDER BY age ASC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 60,
+    "db_id": "hospital",
+    "question": "List the name and consultation fee of doctors practising in Delhi in ascending order of consultation fee.",
+    "evidence": "",
+    "SQL": "SELECT name, consultation_fee FROM doctors WHERE city = 'Delhi' ORDER BY consultation_fee ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 61,
+    "db_id": "hospital",
+    "question": "List the name and years of experience of doctors practising in Hyderabad sorted by years of experience from highest to lowest.",
+    "evidence": "",
+    "SQL": "SELECT name, experience_years FROM doctors WHERE city = 'Hyderabad' ORDER BY experience_years DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 62,
+    "db_id": "hospital",
+    "question": "List the name and consultation fee of doctors practising in Chennai ordered by consultation fee descending.",
+    "evidence": "",
+    "SQL": "SELECT name, consultation_fee FROM doctors WHERE city = 'Chennai' ORDER BY consultation_fee DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 63,
+    "db_id": "hospital",
+    "question": "What is the average age of patients in each city?",
+    "evidence": "",
+    "SQL": "SELECT city, AVG(age) FROM patients GROUP BY city",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 64,
+    "db_id": "hospital",
+    "question": "Show the number of doctors per specialty.",
+    "evidence": "",
+    "SQL": "SELECT specialty, COUNT(*) FROM doctors GROUP BY specialty",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 65,
+    "db_id": "hospital",
+    "question": "How many doctors are there in each city?",
+    "evidence": "",
+    "SQL": "SELECT city, COUNT(*) FROM doctors GROUP BY city",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 66,
+    "db_id": "hospital",
+    "question": "Count the patients for each city.",
+    "evidence": "",
+    "SQL": "SELECT city, COUNT(*) FROM patients GROUP BY city",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 67,
+    "db_id": "hospital",
+    "question": "Show the number of patients per ward.",
+    "evidence": "",
+    "SQL": "SELECT ward, COUNT(*) FROM patients GROUP BY ward",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 68,
+    "db_id": "hospital",
+    "question": "List the appointment IDs for patients from Kolkata with a fee above 1200 rupees.",
+    "evidence": "",
+    "SQL": "SELECT appointments.appointment_id FROM appointments JOIN patients ON appointments.patient_id = patients.patient_id WHERE patients.city = 'Kolkata' AND appointments.fee > 1200",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 69,
+    "db_id": "hospital",
+    "question": "List the appointment IDs for patients from Chennai with a fee above Rs. 1,400.",
+    "evidence": "",
+    "SQL": "SELECT appointments.appointment_id FROM appointments JOIN patients ON appointments.patient_id = patients.patient_id WHERE patients.city = 'Chennai' AND appointments.fee > 1400",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 70,
+    "db_id": "hospital",
+    "question": "What is the average fee of appointments with doctors specialising in General Medicine?",
+    "evidence": "",
+    "SQL": "SELECT AVG(appointments.fee) FROM appointments JOIN doctors ON appointments.doctor_id = doctors.doctor_id WHERE doctors.specialty = 'General Medicine'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 71,
+    "db_id": "hospital",
+    "question": "List the appointment IDs for patients from Hyderabad with a fee above Rs. 1,700.",
+    "evidence": "",
+    "SQL": "SELECT appointments.appointment_id FROM appointments JOIN patients ON appointments.patient_id = patients.patient_id WHERE patients.city = 'Hyderabad' AND appointments.fee > 1700",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 72,
+    "db_id": "hospital",
+    "question": "What is the average fee of appointments with doctors specialising in Neurology?",
+    "evidence": "",
+    "SQL": "SELECT AVG(appointments.fee) FROM appointments JOIN doctors ON appointments.doctor_id = doctors.doctor_id WHERE doctors.specialty = 'Neurology'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 73,
+    "db_id": "hospital",
+    "question": "What is the average fee of appointments with doctors specialising in ENT?",
+    "evidence": "",
+    "SQL": "SELECT AVG(appointments.fee) FROM appointments JOIN doctors ON appointments.doctor_id = doctors.doctor_id WHERE doctors.specialty = 'ENT'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 74,
+    "db_id": "hospital",
+    "question": "List the appointment IDs for patients from Kolkata with a fee above ₹1,900.",
+    "evidence": "",
+    "SQL": "SELECT appointments.appointment_id FROM appointments JOIN patients ON appointments.patient_id = patients.patient_id WHERE patients.city = 'Kolkata' AND appointments.fee > 1900",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 75,
+    "db_id": "hospital",
+    "question": "List the appointment IDs for patients from Coimbatore with a fee above INR 1100.",
+    "evidence": "",
+    "SQL": "SELECT appointments.appointment_id FROM appointments JOIN patients ON appointments.patient_id = patients.patient_id WHERE patients.city = 'Coimbatore' AND appointments.fee > 1100",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 76,
+    "db_id": "retail",
+    "question": "Which customers are in the Silver tier?",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE loyalty_tier = 'Silver'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 77,
+    "db_id": "retail",
+    "question": "Get customers aged 50 or younger",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE age <= 50",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 78,
+    "db_id": "retail",
+    "question": "Display customers living in Chennai",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE city = 'Chennai'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 79,
+    "db_id": "retail",
+    "question": "Which products have rating lower than 3.0?",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE rating < 3",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 80,
+    "db_id": "retail",
+    "question": "List all customers who joined since 2022-11-17",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE join_date >= '2022-11-17'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 81,
+    "db_id": "retail",
+    "question": "Find orders whose amount is up to 40000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE amount <= 40000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 82,
+    "db_id": "retail",
+    "question": "Which orders were placed in November 2023?",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE order_date >= '2023-11-01' AND order_date <= '2023-11-30'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 83,
+    "db_id": "retail",
+    "question": "Which customers are in the Gold tier?",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE loyalty_tier = 'Gold'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 84,
+    "db_id": "retail",
+    "question": "Show customers with Silver membership",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE loyalty_tier = 'Silver'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 85,
+    "db_id": "retail",
+    "question": "Which products are under Toys?",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category = 'Toys'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 86,
+    "db_id": "retail",
+    "question": "Find all orders whose amount is a minimum of 22,000.",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE amount >= 22000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 87,
+    "db_id": "retail",
+    "question": "List customers with Platinum membership",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE loyalty_tier = 'Platinum'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 88,
+    "db_id": "retail",
+    "question": "Which orders have a amount of more than INR 37000?",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE amount > 37000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 89,
+    "db_id": "retail",
+    "question": "Give me orders having a order amount higher than INR 47000",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE amount > 47000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 90,
+    "db_id": "retail",
+    "question": "Find customers who joined after 2020 and at most 45 years old.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE join_date > '2020-12-31' AND age <= 45",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 91,
+    "db_id": "retail",
+    "question": "Which orders were placed after 2022-12-15 and paid via NetBanking?",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE order_date > '2022-12-15' AND payment_method = 'NetBanking'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 92,
+    "db_id": "retail",
+    "question": "Show the names of orders placed after 2023 and having a amount under 43000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE order_date > '2023-12-31' AND amount < 43000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 93,
+    "db_id": "retail",
+    "question": "Show the names of products under Furniture and with 290 or fewer units in stock",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category = 'Furniture' AND stock <= 290",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 94,
+    "db_id": "retail",
+    "question": "Display orders placed in March 2023 and that are returned",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE order_date >= '2023-03-01' AND order_date <= '2023-03-31' AND status = 'Returned'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 95,
+    "db_id": "retail",
+    "question": "List products in the Groceries category and with a rating of 3.3 or below",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category = 'Groceries' AND rating <= 3.3",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 96,
+    "db_id": "retail",
+    "question": "Find all customers who joined from 14 October 2025 onwards and whose age is greater than 30.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE join_date >= '2025-10-14' AND age > 30",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 97,
+    "db_id": "retail",
+    "question": "Which products have price ₹36,000 or above and under Groceries?",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE price >= 36000 AND category = 'Groceries'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 98,
+    "db_id": "retail",
+    "question": "List customers who joined before 2022 and whose age is above 30.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE join_date < '2022-01-01' AND age > 30",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 99,
+    "db_id": "retail",
+    "question": "Find all orders placed after 2022 and with a order amount of 26,000 or above",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE order_date > '2022-12-31' AND amount >= 26000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 100,
+    "db_id": "retail",
+    "question": "List the names of products excluding Furniture",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category != 'Furniture'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 101,
+    "db_id": "retail",
+    "question": "Show the names of products excluding Groceries.",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category != 'Groceries'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 102,
+    "db_id": "retail",
+    "question": "Get products excluding Toys",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category != 'Toys'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 103,
+    "db_id": "retail",
+    "question": "Display customers not in the Platinum tier.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE loyalty_tier != 'Platinum'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 104,
+    "db_id": "retail",
+    "question": "Which products are excluding Groceries?",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category != 'Groceries'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 105,
+    "db_id": "retail",
+    "question": "Show me customers not from Hyderabad.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE city != 'Hyderabad'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 106,
+    "db_id": "retail",
+    "question": "Find all products in the Groceries or Furniture category",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category IN ('Groceries', 'Furniture')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 107,
+    "db_id": "retail",
+    "question": "Find products under Groceries or Electronics",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category IN ('Groceries', 'Electronics')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 108,
+    "db_id": "retail",
+    "question": "List the names of products under Groceries or Books.",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category IN ('Groceries', 'Books')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 109,
+    "db_id": "retail",
+    "question": "Get orders paid via Card or NetBanking",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE payment_method IN ('Card', 'NetBanking')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 110,
+    "db_id": "retail",
+    "question": "Display products whose units in stock is between 180 and 350",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE stock >= 180 AND stock <= 350",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 111,
+    "db_id": "retail",
+    "question": "Give me products whose rating is between 3.5 and 4.0",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE rating >= 3.5 AND rating <= 4",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 112,
+    "db_id": "retail",
+    "question": "Get customers with age between 30 and 60.",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE age >= 30 AND age <= 60",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 113,
+    "db_id": "retail",
+    "question": "Which customers have age between 35 and 65?",
+    "evidence": "",
+    "SQL": "SELECT name FROM customers WHERE age >= 35 AND age <= 65",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 114,
+    "db_id": "retail",
+    "question": "What is the number of customers with Gold membership?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE loyalty_tier = 'Gold'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 115,
+    "db_id": "retail",
+    "question": "How many customers who joined in September 2023?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE join_date >= '2023-09-01' AND join_date <= '2023-09-30'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 116,
+    "db_id": "retail",
+    "question": "Count the customers from Hyderabad.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE city = 'Hyderabad'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 117,
+    "db_id": "retail",
+    "question": "What is the number of orders paid using Card?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM orders WHERE payment_method = 'Card'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 118,
+    "db_id": "retail",
+    "question": "What is the number of customers located in Pune?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE city = 'Pune'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 119,
+    "db_id": "retail",
+    "question": "What is the number of customers younger than 35?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE age < 35",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 120,
+    "db_id": "retail",
+    "question": "Give the total number of customers aged 55 or older.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM customers WHERE age >= 55",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 121,
+    "db_id": "retail",
+    "question": "Give the total number of orders with status Shipped.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM orders WHERE status = 'Shipped'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 122,
+    "db_id": "retail",
+    "question": "Calculate the average age for customers who joined in April 2023.",
+    "evidence": "",
+    "SQL": "SELECT AVG(age) FROM customers WHERE join_date >= '2023-04-01' AND join_date <= '2023-04-30'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 123,
+    "db_id": "retail",
+    "question": "Calculate the total order amount for orders placed after 2024.",
+    "evidence": "",
+    "SQL": "SELECT SUM(amount) FROM orders WHERE order_date > '2024-12-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 124,
+    "db_id": "retail",
+    "question": "Find the lowest order amount among orders placed before 2023.",
+    "evidence": "",
+    "SQL": "SELECT MIN(amount) FROM orders WHERE order_date < '2023-01-01'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 125,
+    "db_id": "retail",
+    "question": "Find the maximum order amount among orders paid using NetBanking.",
+    "evidence": "",
+    "SQL": "SELECT MAX(amount) FROM orders WHERE payment_method = 'NetBanking'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 126,
+    "db_id": "retail",
+    "question": "Find the highest order amount among orders paid using NetBanking.",
+    "evidence": "",
+    "SQL": "SELECT MAX(amount) FROM orders WHERE payment_method = 'NetBanking'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 127,
+    "db_id": "retail",
+    "question": "Find the mean age among customers located in Vellore.",
+    "evidence": "",
+    "SQL": "SELECT AVG(age) FROM customers WHERE city = 'Vellore'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 128,
+    "db_id": "retail",
+    "question": "What is the maximum order amount of orders placed in August 2021?",
+    "evidence": "",
+    "SQL": "SELECT MAX(amount) FROM orders WHERE order_date >= '2021-08-01' AND order_date <= '2021-08-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 129,
+    "db_id": "retail",
+    "question": "Calculate the highest order amount for orders.",
+    "evidence": "",
+    "SQL": "SELECT MAX(amount) FROM orders",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 130,
+    "db_id": "retail",
+    "question": "List the top 3 products by units in stock.",
+    "evidence": "",
+    "SQL": "SELECT name FROM products ORDER BY stock DESC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 131,
+    "db_id": "retail",
+    "question": "Which 5 orders have the lowest order amount?",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders ORDER BY amount ASC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 132,
+    "db_id": "retail",
+    "question": "List the top 3 orders with status Shipped by order amount.",
+    "evidence": "",
+    "SQL": "SELECT order_id FROM orders WHERE status = 'Shipped' ORDER BY amount DESC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 133,
+    "db_id": "retail",
+    "question": "Find the product with the lowest rating.",
+    "evidence": "",
+    "SQL": "SELECT name FROM products ORDER BY rating ASC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 134,
+    "db_id": "retail",
+    "question": "List the bottom 3 products in the Toys category by units in stock.",
+    "evidence": "",
+    "SQL": "SELECT name FROM products WHERE category = 'Toys' ORDER BY stock ASC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 135,
+    "db_id": "retail",
+    "question": "Which product has the highest price?",
+    "evidence": "",
+    "SQL": "SELECT name FROM products ORDER BY price DESC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 136,
+    "db_id": "retail",
+    "question": "Show the name and age of customers from Delhi sorted by age from highest to lowest.",
+    "evidence": "",
+    "SQL": "SELECT name, age FROM customers WHERE city = 'Delhi' ORDER BY age DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 137,
+    "db_id": "retail",
+    "question": "List the name and order amount of orders paid via UPI sorted by order amount from lowest to highest.",
+    "evidence": "",
+    "SQL": "SELECT order_id, amount FROM orders WHERE payment_method = 'UPI' ORDER BY amount ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 138,
+    "db_id": "retail",
+    "question": "Show the name and units in stock of products under Clothing sorted by units in stock from highest to lowest.",
+    "evidence": "",
+    "SQL": "SELECT name, stock FROM products WHERE category = 'Clothing' ORDER BY stock DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 139,
+    "db_id": "retail",
+    "question": "How many orders are there in each payment method?",
+    "evidence": "",
+    "SQL": "SELECT payment_method, COUNT(*) FROM orders GROUP BY payment_method",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 140,
+    "db_id": "retail",
+    "question": "Show the average rating of products per category.",
+    "evidence": "",
+    "SQL": "SELECT category, AVG(rating) FROM products GROUP BY category",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 141,
+    "db_id": "retail",
+    "question": "Show the average order amount of orders per payment method.",
+    "evidence": "",
+    "SQL": "SELECT payment_method, AVG(amount) FROM orders GROUP BY payment_method",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 142,
+    "db_id": "retail",
+    "question": "Show the average age of customers per city.",
+    "evidence": "",
+    "SQL": "SELECT city, AVG(age) FROM customers GROUP BY city",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 143,
+    "db_id": "retail",
+    "question": "What is the average age of customers in each loyalty tier?",
+    "evidence": "",
+    "SQL": "SELECT loyalty_tier, AVG(age) FROM customers GROUP BY loyalty_tier",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 144,
+    "db_id": "retail",
+    "question": "Find customers from Mumbai with purchases above INR 47000.",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT customers.name FROM customers JOIN orders ON orders.customer_id = customers.customer_id WHERE customers.city = 'Mumbai' AND orders.amount > 47000",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 145,
+    "db_id": "retail",
+    "question": "Find customers from Coimbatore with purchases above 44000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT customers.name FROM customers JOIN orders ON orders.customer_id = customers.customer_id WHERE customers.city = 'Coimbatore' AND orders.amount > 44000",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 146,
+    "db_id": "retail",
+    "question": "Find customers from Pune with purchases above 21,000.",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT customers.name FROM customers JOIN orders ON orders.customer_id = customers.customer_id WHERE customers.city = 'Pune' AND orders.amount > 21000",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 147,
+    "db_id": "retail",
+    "question": "What is the total amount of orders paid via Card by customers from Mumbai?",
+    "evidence": "",
+    "SQL": "SELECT SUM(orders.amount) FROM orders JOIN customers ON orders.customer_id = customers.customer_id WHERE orders.payment_method = 'Card' AND customers.city = 'Mumbai'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 148,
+    "db_id": "retail",
+    "question": "Find customers from Chennai with purchases above Rs. 34,000.",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT customers.name FROM customers JOIN orders ON orders.customer_id = customers.customer_id WHERE customers.city = 'Chennai' AND orders.amount > 34000",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 149,
+    "db_id": "retail",
+    "question": "How many orders were placed in 2021 by customers in the Silver tier?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM orders JOIN customers ON orders.customer_id = customers.customer_id WHERE customers.loyalty_tier = 'Silver' AND orders.order_date >= '2021-01-01' AND orders.order_date <= '2021-12-31'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 150,
+    "db_id": "retail",
+    "question": "Find customers from Hyderabad with purchases above 25,000.",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT customers.name FROM customers JOIN orders ON orders.customer_id = customers.customer_id WHERE customers.city = 'Hyderabad' AND orders.amount > 25000",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 151,
+    "db_id": "retail",
+    "question": "How many orders were placed in 2021 by customers in the Gold tier?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM orders JOIN customers ON orders.customer_id = customers.customer_id WHERE customers.loyalty_tier = 'Gold' AND orders.order_date >= '2021-01-01' AND orders.order_date <= '2021-12-31'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 152,
+    "db_id": "university",
+    "question": "Which courses are offered by the ECE department?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'ECE'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 153,
+    "db_id": "university",
+    "question": "Which courses have more than 4 credits?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits > 4",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 154,
+    "db_id": "university",
+    "question": "Which students have CGPA is above 8.5?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa > 8.5",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 155,
+    "db_id": "university",
+    "question": "List the names of courses with at least 3 credits",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits >= 3",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 156,
+    "db_id": "university",
+    "question": "Get students from Delhi.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city = 'Delhi'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 157,
+    "db_id": "university",
+    "question": "Which students have CGPA 6.9 or more?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa >= 6.9",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 158,
+    "db_id": "university",
+    "question": "Find courses with more than 3 credits.",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits > 3",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 159,
+    "db_id": "university",
+    "question": "List the names of students in Biotech.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE department = 'Biotech'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 160,
+    "db_id": "university",
+    "question": "Which students were enrolled before 2021-03-20?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE enrollment_date < '2021-03-20'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 161,
+    "db_id": "university",
+    "question": "Find all courses offered by the Mechanical department",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'Mechanical'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 162,
+    "db_id": "university",
+    "question": "Display courses with more than 3 credits.",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits > 3",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 163,
+    "db_id": "university",
+    "question": "Retrieve students aged 20 or below.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE age <= 20",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 164,
+    "db_id": "university",
+    "question": "Find courses in ECE",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'ECE'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 165,
+    "db_id": "university",
+    "question": "Show students with CGPA less than 9.1",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa < 9.1",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 166,
+    "db_id": "university",
+    "question": "Which courses have fewer than 3 credits and in CSE?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits < 3 AND department = 'CSE'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 167,
+    "db_id": "university",
+    "question": "Which courses have at most 3 credits and offered by the Civil department?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits <= 3 AND department = 'Civil'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 168,
+    "db_id": "university",
+    "question": "Show me courses in IT and with at least 3 credits.",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'IT' AND credits >= 3",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 169,
+    "db_id": "university",
+    "question": "Find all students from the Mechanical department and from Pune.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE department = 'Mechanical' AND city = 'Pune'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 170,
+    "db_id": "university",
+    "question": "Show courses offered by the CSE department and with more than 3 credits.",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'CSE' AND credits > 3",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 171,
+    "db_id": "university",
+    "question": "Which courses have more than 3 credits and in CSE?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits > 3 AND department = 'CSE'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 172,
+    "db_id": "university",
+    "question": "Which students have CGPA above 6.1 and enrolled in 2022?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa > 6.1 AND enrollment_date >= '2022-01-01' AND enrollment_date <= '2022-12-31'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 173,
+    "db_id": "university",
+    "question": "Find students under 20 years old and from the CSE department",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE age < 20 AND department = 'CSE'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 174,
+    "db_id": "university",
+    "question": "Retrieve students in EEE and whose hometown is Kolkata.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE department = 'EEE' AND city = 'Kolkata'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 175,
+    "db_id": "university",
+    "question": "Give me courses in Mechanical and with more than 3 credits",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department = 'Mechanical' AND credits > 3",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 176,
+    "db_id": "university",
+    "question": "Show the names of students not from Chennai",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city != 'Chennai'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 177,
+    "db_id": "university",
+    "question": "Show me students not from Hyderabad",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city != 'Hyderabad'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 178,
+    "db_id": "university",
+    "question": "Which students are not in Civil?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE department != 'Civil'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 179,
+    "db_id": "university",
+    "question": "List all students not from Delhi",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city != 'Delhi'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 180,
+    "db_id": "university",
+    "question": "List all courses not offered by Civil",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department != 'Civil'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 181,
+    "db_id": "university",
+    "question": "Which courses are not offered by EEE?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department != 'EEE'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 182,
+    "db_id": "university",
+    "question": "Show students studying EEE or CSE",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE department IN ('EEE', 'CSE')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 183,
+    "db_id": "university",
+    "question": "Show me students whose hometown is Salem or Delhi.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city IN ('Salem', 'Delhi')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 184,
+    "db_id": "university",
+    "question": "List the names of students whose hometown is Delhi or Mumbai",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city IN ('Delhi', 'Mumbai')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 185,
+    "db_id": "university",
+    "question": "Which courses are offered by the Civil or ECE department?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE department IN ('Civil', 'ECE')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 186,
+    "db_id": "university",
+    "question": "List the names of students with cgpa between 6.5 and 8.9",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa >= 6.5 AND cgpa <= 8.9",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 187,
+    "db_id": "university",
+    "question": "List students with CGPA between 7.2 and 8.6",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa >= 7.2 AND cgpa <= 8.6",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 188,
+    "db_id": "university",
+    "question": "Show students with cgpa between 6.4 and 9.1.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE cgpa >= 6.4 AND cgpa <= 9.1",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 189,
+    "db_id": "university",
+    "question": "Which courses have credits is between 3 and 4?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses WHERE credits >= 3 AND credits <= 4",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 190,
+    "db_id": "university",
+    "question": "How many students enrolled on or before 2023-11-26?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE enrollment_date <= '2023-11-26'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 191,
+    "db_id": "university",
+    "question": "How many students in CSE?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE department = 'CSE'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 192,
+    "db_id": "university",
+    "question": "Give the total number of students enrolled since 2023.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE enrollment_date >= '2023-01-01'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 193,
+    "db_id": "university",
+    "question": "How many courses with more than 4 credits are there?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM courses WHERE credits > 4",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 194,
+    "db_id": "university",
+    "question": "Count the students in CSE.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE department = 'CSE'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 195,
+    "db_id": "university",
+    "question": "Give the total number of students whose cgpa is 9.0 or below.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE cgpa <= 9",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 196,
+    "db_id": "university",
+    "question": "Give the total number of students having a cgpa above 5.9.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE cgpa > 5.9",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 197,
+    "db_id": "university",
+    "question": "Count the students at most 20 years old.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM students WHERE age <= 20",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 198,
+    "db_id": "university",
+    "question": "Find the minimum age among students enrolled since 2021.",
+    "evidence": "",
+    "SQL": "SELECT MIN(age) FROM students WHERE enrollment_date >= '2021-01-01'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 199,
+    "db_id": "university",
+    "question": "What is the minimum credits of courses?",
+    "evidence": "",
+    "SQL": "SELECT MIN(credits) FROM courses",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 200,
+    "db_id": "university",
+    "question": "Calculate the maximum credits for courses in CSE.",
+    "evidence": "",
+    "SQL": "SELECT MAX(credits) FROM courses WHERE department = 'CSE'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 201,
+    "db_id": "university",
+    "question": "Find the minimum CGPA among students enrolled in January 2022.",
+    "evidence": "",
+    "SQL": "SELECT MIN(cgpa) FROM students WHERE enrollment_date >= '2022-01-01' AND enrollment_date <= '2022-01-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 202,
+    "db_id": "university",
+    "question": "Find the highest credits among courses.",
+    "evidence": "",
+    "SQL": "SELECT MAX(credits) FROM courses",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 203,
+    "db_id": "university",
+    "question": "What is the mean CGPA of students studying IT?",
+    "evidence": "",
+    "SQL": "SELECT AVG(cgpa) FROM students WHERE department = 'IT'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 204,
+    "db_id": "university",
+    "question": "What is the highest age of students enrolled on or after 2021-09-17?",
+    "evidence": "",
+    "SQL": "SELECT MAX(age) FROM students WHERE enrollment_date >= '2021-09-17'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 205,
+    "db_id": "university",
+    "question": "What is the maximum age of students enrolled after 2023-09-25?",
+    "evidence": "",
+    "SQL": "SELECT MAX(age) FROM students WHERE enrollment_date > '2023-09-25'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 206,
+    "db_id": "university",
+    "question": "List the bottom 5 students from Delhi by age.",
+    "evidence": "",
+    "SQL": "SELECT name FROM students WHERE city = 'Delhi' ORDER BY age ASC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 207,
+    "db_id": "university",
+    "question": "Which course has the highest credits?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses ORDER BY credits DESC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 208,
+    "db_id": "university",
+    "question": "Find the course with the lowest credits.",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses ORDER BY credits ASC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 209,
+    "db_id": "university",
+    "question": "Which 5 students have the highest age?",
+    "evidence": "",
+    "SQL": "SELECT name FROM students ORDER BY age DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 210,
+    "db_id": "university",
+    "question": "Which 3 courses have the lowest credits?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses ORDER BY credits ASC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 211,
+    "db_id": "university",
+    "question": "Which 5 courses have the highest credits?",
+    "evidence": "",
+    "SQL": "SELECT title FROM courses ORDER BY credits DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 212,
+    "db_id": "university",
+    "question": "List the name and age of students in IT in ascending order of age.",
+    "evidence": "",
+    "SQL": "SELECT name, age FROM students WHERE department = 'IT' ORDER BY age ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 213,
+    "db_id": "university",
+    "question": "Show the name and credits of courses in Biotech in descending order of credits.",
+    "evidence": "",
+    "SQL": "SELECT title, credits FROM courses WHERE department = 'Biotech' ORDER BY credits DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 214,
+    "db_id": "university",
+    "question": "Show the name and CGPA of students studying EEE sorted by CGPA from lowest to highest.",
+    "evidence": "",
+    "SQL": "SELECT name, cgpa FROM students WHERE department = 'EEE' ORDER BY cgpa ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 215,
+    "db_id": "university",
+    "question": "What is the average credits of courses in each department?",
+    "evidence": "",
+    "SQL": "SELECT department, AVG(credits) FROM courses GROUP BY department",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 216,
+    "db_id": "university",
+    "question": "How many students are there in each department?",
+    "evidence": "",
+    "SQL": "SELECT department, COUNT(*) FROM students GROUP BY department",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 217,
+    "db_id": "university",
+    "question": "Show the number of students per department.",
+    "evidence": "",
+    "SQL": "SELECT department, COUNT(*) FROM students GROUP BY department",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 218,
+    "db_id": "university",
+    "question": "Count the courses for each department.",
+    "evidence": "",
+    "SQL": "SELECT department, COUNT(*) FROM courses GROUP BY department",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 219,
+    "db_id": "university",
+    "question": "Show the average CGPA of students per city.",
+    "evidence": "",
+    "SQL": "SELECT city, AVG(cgpa) FROM students GROUP BY city",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 220,
+    "db_id": "university",
+    "question": "Which students from the ECE department scored more than 50 marks?",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT students.name FROM students JOIN enrollments ON enrollments.student_id = students.student_id WHERE students.department = 'ECE' AND enrollments.marks > 50",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 221,
+    "db_id": "university",
+    "question": "What is the average marks of enrollments in the course Fluid Mechanics?",
+    "evidence": "",
+    "SQL": "SELECT AVG(enrollments.marks) FROM enrollments JOIN courses ON enrollments.course_id = courses.course_id WHERE courses.title = 'Fluid Mechanics'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 222,
+    "db_id": "university",
+    "question": "Which students from the IT department scored more than 40 marks?",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT students.name FROM students JOIN enrollments ON enrollments.student_id = students.student_id WHERE students.department = 'IT' AND enrollments.marks > 40",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 223,
+    "db_id": "university",
+    "question": "Which students from the IT department scored more than 65 marks?",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT students.name FROM students JOIN enrollments ON enrollments.student_id = students.student_id WHERE students.department = 'IT' AND enrollments.marks > 65",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 224,
+    "db_id": "university",
+    "question": "What is the average marks of enrollments in the course Database Systems?",
+    "evidence": "",
+    "SQL": "SELECT AVG(enrollments.marks) FROM enrollments JOIN courses ON enrollments.course_id = courses.course_id WHERE courses.title = 'Database Systems'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 225,
+    "db_id": "university",
+    "question": "Which students from the Civil department scored more than 50 marks?",
+    "evidence": "",
+    "SQL": "SELECT DISTINCT students.name FROM students JOIN enrollments ON enrollments.student_id = students.student_id WHERE students.department = 'Civil' AND enrollments.marks > 50",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 226,
+    "db_id": "university",
+    "question": "How many enrollments of Biotech students in semester 2024-Even have marks below 55?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM enrollments JOIN students ON enrollments.student_id = students.student_id WHERE enrollments.semester = '2024-Even' AND enrollments.marks < 55 AND students.department = 'Biotech'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 227,
+    "db_id": "university",
+    "question": "What is the average marks of enrollments in the course Cloud Computing?",
+    "evidence": "",
+    "SQL": "SELECT AVG(enrollments.marks) FROM enrollments JOIN courses ON enrollments.course_id = courses.course_id WHERE courses.title = 'Cloud Computing'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 228,
+    "db_id": "finance",
+    "question": "Show me accounts of type Current",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type = 'Current'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 229,
+    "db_id": "finance",
+    "question": "Find all accounts younger than 30",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE holder_age < 30",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 230,
+    "db_id": "finance",
+    "question": "Find transactions made since 2024.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_date >= '2024-01-01'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 231,
+    "db_id": "finance",
+    "question": "Display transactions made after 2023.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_date > '2023-12-31'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 232,
+    "db_id": "finance",
+    "question": "Get transactions made before 2024-08-03.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_date < '2024-08-03'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 233,
+    "db_id": "finance",
+    "question": "Give me accounts below 65 years of age.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE holder_age < 65",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 234,
+    "db_id": "finance",
+    "question": "Which accounts are at least 75 years old?",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE holder_age >= 75",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 235,
+    "db_id": "finance",
+    "question": "Give me transactions having a amount over Rs. 67,000.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE amount > 67000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 236,
+    "db_id": "finance",
+    "question": "Display accounts of type Fixed Deposit.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type = 'Fixed Deposit'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 237,
+    "db_id": "finance",
+    "question": "List all transactions made through NetBanking",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel = 'NetBanking'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 238,
+    "db_id": "finance",
+    "question": "Which accounts are at most 70 years old?",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE holder_age <= 70",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 239,
+    "db_id": "finance",
+    "question": "Which transactions have amount above ₹150,000?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE amount > 150000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 240,
+    "db_id": "finance",
+    "question": "List all transactions made through Cheque",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel = 'Cheque'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 241,
+    "db_id": "finance",
+    "question": "Give me transactions made since 2024-06-21.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_date >= '2024-06-21'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 242,
+    "db_id": "finance",
+    "question": "Give me transactions with amount less than 91000 rupees and made via Cheque.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE amount < 91000 AND channel = 'Cheque'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 243,
+    "db_id": "finance",
+    "question": "List transactions with a amount of a minimum of 90000 rupees and made through Branch.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE amount >= 90000 AND channel = 'Branch'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 244,
+    "db_id": "finance",
+    "question": "Show the names of accounts of type Savings and aged over 65",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type = 'Savings' AND holder_age > 65",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 245,
+    "db_id": "finance",
+    "question": "Show me transactions made in May 2025 and of type Credit",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_date >= '2025-05-01' AND transaction_date <= '2025-05-31' AND transaction_type = 'Credit'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 246,
+    "db_id": "finance",
+    "question": "Get accounts opened on or after 2023-12-13 and with a balance of less than ₹330,000",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE opened_date >= '2023-12-13' AND balance < 330000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 247,
+    "db_id": "finance",
+    "question": "Retrieve accounts in the Mumbai branch and opened after 22 January 2024.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch = 'Mumbai' AND opened_date > '2024-01-22'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 248,
+    "db_id": "finance",
+    "question": "Show me accounts at least 30 years old and opened in March 2011",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE holder_age >= 30 AND opened_date >= '2011-03-01' AND opened_date <= '2011-03-31'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 249,
+    "db_id": "finance",
+    "question": "Which accounts are Salary accounts and at the Bengaluru branch?",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type = 'Salary' AND branch = 'Bengaluru'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 250,
+    "db_id": "finance",
+    "question": "Retrieve accounts opened on or before 26 July 2020 and with age not less than 30",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE opened_date <= '2020-07-26' AND holder_age >= 30",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 251,
+    "db_id": "finance",
+    "question": "Find all accounts in the Pune branch and aged 70 or below.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch = 'Pune' AND holder_age <= 70",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 252,
+    "db_id": "finance",
+    "question": "Which transactions are not made via Cheque?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel != 'Cheque'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 253,
+    "db_id": "finance",
+    "question": "List all transactions that are not Debit.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_type != 'Debit'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 254,
+    "db_id": "finance",
+    "question": "Which transactions are not made via UPI?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel != 'UPI'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 255,
+    "db_id": "finance",
+    "question": "Which transactions are not made via NetBanking?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel != 'NetBanking'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 256,
+    "db_id": "finance",
+    "question": "List transactions not made via UPI.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel != 'UPI'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 257,
+    "db_id": "finance",
+    "question": "Which accounts are not Salary accounts?",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type != 'Salary'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 258,
+    "db_id": "finance",
+    "question": "Find transactions of type Debit or Credit.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_type IN ('Debit', 'Credit')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 259,
+    "db_id": "finance",
+    "question": "List all accounts at the Kolkata or Salem branch.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch IN ('Kolkata', 'Salem')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 260,
+    "db_id": "finance",
+    "question": "List accounts in the Coimbatore or Hyderabad branch.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch IN ('Coimbatore', 'Hyderabad')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 261,
+    "db_id": "finance",
+    "question": "Show accounts that are Fixed Deposit or Salary accounts.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type IN ('Fixed Deposit', 'Salary')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 262,
+    "db_id": "finance",
+    "question": "Which transactions have amount between 56000 rupees and 94,000?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE amount >= 56000 AND amount <= 94000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 263,
+    "db_id": "finance",
+    "question": "Find accounts with balance between INR 340000 and INR 970000.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE balance >= 340000 AND balance <= 970000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 264,
+    "db_id": "finance",
+    "question": "Show me accounts with balance between 450000 rupees and ₹950,000",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE balance >= 450000 AND balance <= 950000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 265,
+    "db_id": "finance",
+    "question": "Show me accounts whose balance is between 250,000 and 12 lakh rupees.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE balance >= 250000 AND balance <= 1200000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 266,
+    "db_id": "finance",
+    "question": "Give the total number of transactions made in August 2023.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions WHERE transaction_date >= '2023-08-01' AND transaction_date <= '2023-08-31'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 267,
+    "db_id": "finance",
+    "question": "How many transactions with amount lower than 48000 rupees are there?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions WHERE amount < 48000",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 268,
+    "db_id": "finance",
+    "question": "Count the accounts with balance less than INR 680000.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM accounts WHERE balance < 680000",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 269,
+    "db_id": "finance",
+    "question": "How many transactions of type Debit?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions WHERE transaction_type = 'Debit'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 270,
+    "db_id": "finance",
+    "question": "Give the total number of accounts opened in March 2022.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM accounts WHERE opened_date >= '2022-03-01' AND opened_date <= '2022-03-31'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 271,
+    "db_id": "finance",
+    "question": "Give the total number of transactions made from 2023-02-18 onwards.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions WHERE transaction_date >= '2023-02-18'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 272,
+    "db_id": "finance",
+    "question": "What is the number of accounts aged 30 or younger?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM accounts WHERE holder_age <= 30",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 273,
+    "db_id": "finance",
+    "question": "Count the transactions made through UPI.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions WHERE channel = 'UPI'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 274,
+    "db_id": "finance",
+    "question": "Find the average amount among transactions made in 2023.",
+    "evidence": "",
+    "SQL": "SELECT AVG(amount) FROM transactions WHERE transaction_date >= '2023-01-01' AND transaction_date <= '2023-12-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 275,
+    "db_id": "finance",
+    "question": "What is the mean amount of transactions?",
+    "evidence": "",
+    "SQL": "SELECT AVG(amount) FROM transactions",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 276,
+    "db_id": "finance",
+    "question": "What is the average amount of transactions made via Cheque?",
+    "evidence": "",
+    "SQL": "SELECT AVG(amount) FROM transactions WHERE channel = 'Cheque'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 277,
+    "db_id": "finance",
+    "question": "Find the lowest amount among transactions of type Credit.",
+    "evidence": "",
+    "SQL": "SELECT MIN(amount) FROM transactions WHERE transaction_type = 'Credit'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 278,
+    "db_id": "finance",
+    "question": "What is the maximum age of accounts opened after 2015?",
+    "evidence": "",
+    "SQL": "SELECT MAX(holder_age) FROM accounts WHERE opened_date > '2015-12-31'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 279,
+    "db_id": "finance",
+    "question": "What is the highest amount of transactions made on or before January 17, 2025?",
+    "evidence": "",
+    "SQL": "SELECT MAX(amount) FROM transactions WHERE transaction_date <= '2025-01-17'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 280,
+    "db_id": "finance",
+    "question": "Find the highest age among accounts in the Coimbatore branch.",
+    "evidence": "",
+    "SQL": "SELECT MAX(holder_age) FROM accounts WHERE branch = 'Coimbatore'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 281,
+    "db_id": "finance",
+    "question": "Calculate the lowest amount for transactions of type Credit.",
+    "evidence": "",
+    "SQL": "SELECT MIN(amount) FROM transactions WHERE transaction_type = 'Credit'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 282,
+    "db_id": "finance",
+    "question": "List the top 10 accounts that are Current accounts by balance.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE account_type = 'Current' ORDER BY balance DESC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 283,
+    "db_id": "finance",
+    "question": "Which 5 transactions made through ATM have the highest amount?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE channel = 'ATM' ORDER BY amount DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 284,
+    "db_id": "finance",
+    "question": "Which 5 transactions have the highest amount?",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions ORDER BY amount DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 285,
+    "db_id": "finance",
+    "question": "Show the 5 transactions of type Credit with the highest amount.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id FROM transactions WHERE transaction_type = 'Credit' ORDER BY amount DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 286,
+    "db_id": "finance",
+    "question": "List the top 5 accounts at the Hyderabad branch by balance.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch = 'Hyderabad' ORDER BY balance DESC LIMIT 5",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 287,
+    "db_id": "finance",
+    "question": "Show the 10 accounts in the Kolkata branch with the highest balance.",
+    "evidence": "",
+    "SQL": "SELECT holder_name FROM accounts WHERE branch = 'Kolkata' ORDER BY balance DESC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 288,
+    "db_id": "finance",
+    "question": "Show the name and age of accounts of type Savings ordered by age ascending.",
+    "evidence": "",
+    "SQL": "SELECT holder_name, holder_age FROM accounts WHERE account_type = 'Savings' ORDER BY holder_age ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 289,
+    "db_id": "finance",
+    "question": "Show the name and balance of accounts of type Savings ordered by balance ascending.",
+    "evidence": "",
+    "SQL": "SELECT holder_name, balance FROM accounts WHERE account_type = 'Savings' ORDER BY balance ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 290,
+    "db_id": "finance",
+    "question": "Show the name and amount of transactions made through Branch in ascending order of amount.",
+    "evidence": "",
+    "SQL": "SELECT transaction_id, amount FROM transactions WHERE channel = 'Branch' ORDER BY amount ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 291,
+    "db_id": "finance",
+    "question": "Count the accounts for each branch.",
+    "evidence": "",
+    "SQL": "SELECT branch, COUNT(*) FROM accounts GROUP BY branch",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 292,
+    "db_id": "finance",
+    "question": "Show the average amount of transactions per channel.",
+    "evidence": "",
+    "SQL": "SELECT channel, AVG(amount) FROM transactions GROUP BY channel",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 293,
+    "db_id": "finance",
+    "question": "Show the average amount of transactions per transaction type.",
+    "evidence": "",
+    "SQL": "SELECT transaction_type, AVG(amount) FROM transactions GROUP BY transaction_type",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 294,
+    "db_id": "finance",
+    "question": "Count the accounts for each account type.",
+    "evidence": "",
+    "SQL": "SELECT account_type, COUNT(*) FROM accounts GROUP BY account_type",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 295,
+    "db_id": "finance",
+    "question": "What is the average balance of accounts in each account type?",
+    "evidence": "",
+    "SQL": "SELECT account_type, AVG(balance) FROM accounts GROUP BY account_type",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 296,
+    "db_id": "finance",
+    "question": "List transactions with an amount above 100000 rupees from accounts in the Vellore branch.",
+    "evidence": "",
+    "SQL": "SELECT transactions.transaction_id FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.amount > 100000 AND accounts.branch = 'Vellore'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 297,
+    "db_id": "finance",
+    "question": "List transactions with an amount above 54000 rupees from accounts in the Bengaluru branch.",
+    "evidence": "",
+    "SQL": "SELECT transactions.transaction_id FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.amount > 54000 AND accounts.branch = 'Bengaluru'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 298,
+    "db_id": "finance",
+    "question": "How many Debit transactions were made via Branch by Salary account holders?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.transaction_type = 'Debit' AND transactions.channel = 'Branch' AND accounts.account_type = 'Salary'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 299,
+    "db_id": "finance",
+    "question": "List transactions with an amount above Rs. 45,000 from accounts in the Coimbatore branch.",
+    "evidence": "",
+    "SQL": "SELECT transactions.transaction_id FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.amount > 45000 AND accounts.branch = 'Coimbatore'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 300,
+    "db_id": "finance",
+    "question": "List transactions with an amount above 160,000 from accounts in the Bengaluru branch.",
+    "evidence": "",
+    "SQL": "SELECT transactions.transaction_id FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.amount > 160000 AND accounts.branch = 'Bengaluru'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 301,
+    "db_id": "finance",
+    "question": "What is the total amount of Credit transactions for accounts opened after 2021?",
+    "evidence": "",
+    "SQL": "SELECT SUM(transactions.amount) FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.transaction_type = 'Credit' AND accounts.opened_date > '2021-12-31'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 302,
+    "db_id": "finance",
+    "question": "What is the total amount of Credit transactions for accounts opened after 2019?",
+    "evidence": "",
+    "SQL": "SELECT SUM(transactions.amount) FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.transaction_type = 'Credit' AND accounts.opened_date > '2019-12-31'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 303,
+    "db_id": "finance",
+    "question": "How many Debit transactions were made via ATM by Savings account holders?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM transactions JOIN accounts ON transactions.account_id = accounts.account_id WHERE transactions.transaction_type = 'Debit' AND transactions.channel = 'ATM' AND accounts.account_type = 'Savings'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 304,
+    "db_id": "travel",
+    "question": "Show the names of bookings booked on or after 2025-09-28.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE booking_date >= '2025-09-28'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 305,
+    "db_id": "travel",
+    "question": "List all flights from Coimbatore.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE origin = 'Coimbatore'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 306,
+    "db_id": "travel",
+    "question": "Which bookings are in Economy class?",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class = 'Economy'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 307,
+    "db_id": "travel",
+    "question": "Show the names of flights whose fare is exceeding INR 13000.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE price > 13000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 308,
+    "db_id": "travel",
+    "question": "List all flights arriving in Kochi.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE destination = 'Kochi'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 309,
+    "db_id": "travel",
+    "question": "Which bookings are travelling in Economy?",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class = 'Economy'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 310,
+    "db_id": "travel",
+    "question": "List flights run by Air India.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE airline = 'Air India'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 311,
+    "db_id": "travel",
+    "question": "Which flights have a fare no more than 8,700?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE price <= 8700",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 312,
+    "db_id": "travel",
+    "question": "Find bookings with a amount paid of over ₹13,000.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE amount > 13000",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 313,
+    "db_id": "travel",
+    "question": "Which bookings were booked after March 14, 2026?",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE booking_date > '2026-03-14'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 314,
+    "db_id": "travel",
+    "question": "Get bookings aged 40 or above.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE passenger_age >= 40",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 315,
+    "db_id": "travel",
+    "question": "Which bookings are in Business class?",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class = 'Business'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 316,
+    "db_id": "travel",
+    "question": "Which flights have fewer than 75 seats available?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE seats_available < 75",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 317,
+    "db_id": "travel",
+    "question": "Which flights are operated by IndiGo?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE airline = 'IndiGo'",
+    "difficulty": "simple",
+    "qtype": "list"
+  },
+  {
+    "question_id": 318,
+    "db_id": "travel",
+    "question": "Display flights departing in October 2026 and with a ticket price of over 10,000.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE departure_date >= '2026-10-01' AND departure_date <= '2026-10-31' AND price > 10000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 319,
+    "db_id": "travel",
+    "question": "Which flights have duration in minutes higher than 100 and departing before 2025-06-05?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE duration_minutes > 100 AND departure_date < '2025-06-05'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 320,
+    "db_id": "travel",
+    "question": "Which flights are from Kochi and with more than 90 seats available?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE origin = 'Kochi' AND seats_available > 90",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 321,
+    "db_id": "travel",
+    "question": "List bookings booked since 2026 and travelling in Economy",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE booking_date >= '2026-01-01' AND seat_class = 'Economy'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 322,
+    "db_id": "travel",
+    "question": "Show me flights arriving in Kolkata and with a ticket price of higher than 16000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE destination = 'Kolkata' AND price > 16000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 323,
+    "db_id": "travel",
+    "question": "Which flights are arriving in Delhi and having a ticket price greater than 10,000?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE destination = 'Delhi' AND price > 10000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 324,
+    "db_id": "travel",
+    "question": "Which flights are departing in November 2026 and whose duration in minutes is no more than 140?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE departure_date >= '2026-11-01' AND departure_date <= '2026-11-30' AND duration_minutes <= 140",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 325,
+    "db_id": "travel",
+    "question": "List the names of bookings whose age is not less than 45 and having a amount paid a maximum of 17,000",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE passenger_age >= 45 AND amount <= 17000",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 326,
+    "db_id": "travel",
+    "question": "Show bookings under 65 years old and booked in March 2026",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE passenger_age < 65 AND booking_date >= '2026-03-01' AND booking_date <= '2026-03-31'",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 327,
+    "db_id": "travel",
+    "question": "Get flights whose fare is higher than 9500 rupees and whose duration in minutes is less than 95",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE price > 9500 AND duration_minutes < 95",
+    "difficulty": "moderate",
+    "qtype": "multi-filter"
+  },
+  {
+    "question_id": 328,
+    "db_id": "travel",
+    "question": "Retrieve flights not departing from Madurai",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE origin != 'Madurai'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 329,
+    "db_id": "travel",
+    "question": "Show the names of flights not departing from Chennai.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE origin != 'Chennai'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 330,
+    "db_id": "travel",
+    "question": "Show the names of bookings not in Premium Economy class.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class != 'Premium Economy'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 331,
+    "db_id": "travel",
+    "question": "List flights not operated by SpiceJet",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE airline != 'SpiceJet'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 332,
+    "db_id": "travel",
+    "question": "Show bookings not in Premium Economy class",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class != 'Premium Economy'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 333,
+    "db_id": "travel",
+    "question": "List bookings not in Business class.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class != 'Business'",
+    "difficulty": "moderate",
+    "qtype": "negation"
+  },
+  {
+    "question_id": 334,
+    "db_id": "travel",
+    "question": "Find flights arriving in Chennai or Madurai",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE destination IN ('Chennai', 'Madurai')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 335,
+    "db_id": "travel",
+    "question": "List the names of bookings travelling in Business or Premium Economy.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class IN ('Business', 'Premium Economy')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 336,
+    "db_id": "travel",
+    "question": "Display bookings in Economy or Premium Economy class",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class IN ('Economy', 'Premium Economy')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 337,
+    "db_id": "travel",
+    "question": "Find all bookings in Premium Economy or Business class.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class IN ('Premium Economy', 'Business')",
+    "difficulty": "moderate",
+    "qtype": "in-list"
+  },
+  {
+    "question_id": 338,
+    "db_id": "travel",
+    "question": "Retrieve bookings whose amount paid is between 11,000 and 29000 rupees",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE amount >= 11000 AND amount <= 29000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 339,
+    "db_id": "travel",
+    "question": "Give me bookings with amount paid between Rs. 12,000 and 36000 rupees.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE amount >= 12000 AND amount <= 36000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 340,
+    "db_id": "travel",
+    "question": "Find bookings whose amount paid is between 24,000 and INR 34000.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE amount >= 24000 AND amount <= 34000",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 341,
+    "db_id": "travel",
+    "question": "Which flights have seats available between 55 and 135?",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE seats_available >= 55 AND seats_available <= 135",
+    "difficulty": "moderate",
+    "qtype": "range"
+  },
+  {
+    "question_id": 342,
+    "db_id": "travel",
+    "question": "Give the total number of flights with a fare of no less than 6,100.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM flights WHERE price >= 6100",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 343,
+    "db_id": "travel",
+    "question": "Give the total number of flights with duration in minutes above 85.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM flights WHERE duration_minutes > 85",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 344,
+    "db_id": "travel",
+    "question": "What is the number of bookings booked before 2024?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM bookings WHERE booking_date < '2024-01-01'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 345,
+    "db_id": "travel",
+    "question": "What is the number of flights with fare 6500 rupees or more?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM flights WHERE price >= 6500",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 346,
+    "db_id": "travel",
+    "question": "Count the bookings below 40 years of age.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM bookings WHERE passenger_age < 40",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 347,
+    "db_id": "travel",
+    "question": "Count the flights departing in March 2025.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM flights WHERE departure_date >= '2025-03-01' AND departure_date <= '2025-03-31'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 348,
+    "db_id": "travel",
+    "question": "Give the total number of bookings with a age of higher than 45.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM bookings WHERE passenger_age > 45",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 349,
+    "db_id": "travel",
+    "question": "Count the flights departing since May 4, 2026.",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM flights WHERE departure_date >= '2026-05-04'",
+    "difficulty": "simple",
+    "qtype": "count"
+  },
+  {
+    "question_id": 350,
+    "db_id": "travel",
+    "question": "Find the lowest amount paid among bookings travelling in Business.",
+    "evidence": "",
+    "SQL": "SELECT MIN(amount) FROM bookings WHERE seat_class = 'Business'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 351,
+    "db_id": "travel",
+    "question": "Calculate the average age for bookings.",
+    "evidence": "",
+    "SQL": "SELECT AVG(passenger_age) FROM bookings",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 352,
+    "db_id": "travel",
+    "question": "Calculate the total fare for flights.",
+    "evidence": "",
+    "SQL": "SELECT SUM(price) FROM flights",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 353,
+    "db_id": "travel",
+    "question": "Calculate the mean amount paid for bookings travelling in Premium Economy.",
+    "evidence": "",
+    "SQL": "SELECT AVG(amount) FROM bookings WHERE seat_class = 'Premium Economy'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 354,
+    "db_id": "travel",
+    "question": "Calculate the average seats available for flights.",
+    "evidence": "",
+    "SQL": "SELECT AVG(seats_available) FROM flights",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 355,
+    "db_id": "travel",
+    "question": "Calculate the highest fare for flights departing from Chennai.",
+    "evidence": "",
+    "SQL": "SELECT MAX(price) FROM flights WHERE origin = 'Chennai'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 356,
+    "db_id": "travel",
+    "question": "Find the minimum fare among flights departing from Kochi.",
+    "evidence": "",
+    "SQL": "SELECT MIN(price) FROM flights WHERE origin = 'Kochi'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 357,
+    "db_id": "travel",
+    "question": "Find the minimum age among bookings in Premium Economy class.",
+    "evidence": "",
+    "SQL": "SELECT MIN(passenger_age) FROM bookings WHERE seat_class = 'Premium Economy'",
+    "difficulty": "simple",
+    "qtype": "aggregate"
+  },
+  {
+    "question_id": 358,
+    "db_id": "travel",
+    "question": "Find the booking travelling in Premium Economy with the lowest age.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class = 'Premium Economy' ORDER BY passenger_age ASC LIMIT 1",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 359,
+    "db_id": "travel",
+    "question": "List the top 10 bookings by amount paid.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings ORDER BY amount DESC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 360,
+    "db_id": "travel",
+    "question": "List the top 3 bookings by amount paid.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings ORDER BY amount DESC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 361,
+    "db_id": "travel",
+    "question": "List the bottom 10 flights from Kolkata by duration in minutes.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights WHERE origin = 'Kolkata' ORDER BY duration_minutes ASC LIMIT 10",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 362,
+    "db_id": "travel",
+    "question": "Show the 3 bookings in Premium Economy class with the lowest age.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name FROM bookings WHERE seat_class = 'Premium Economy' ORDER BY passenger_age ASC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 363,
+    "db_id": "travel",
+    "question": "Show the 3 flights with the lowest seats available.",
+    "evidence": "",
+    "SQL": "SELECT flight_no FROM flights ORDER BY seats_available ASC LIMIT 3",
+    "difficulty": "moderate",
+    "qtype": "top-k"
+  },
+  {
+    "question_id": 364,
+    "db_id": "travel",
+    "question": "Show the name and fare of flights from Hyderabad sorted by fare from lowest to highest.",
+    "evidence": "",
+    "SQL": "SELECT flight_no, price FROM flights WHERE origin = 'Hyderabad' ORDER BY price ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 365,
+    "db_id": "travel",
+    "question": "List the name and duration in minutes of flights run by Akasa Air ordered by duration in minutes ascending.",
+    "evidence": "",
+    "SQL": "SELECT flight_no, duration_minutes FROM flights WHERE airline = 'Akasa Air' ORDER BY duration_minutes ASC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 366,
+    "db_id": "travel",
+    "question": "List the name and age of bookings travelling in Business sorted by age from highest to lowest.",
+    "evidence": "",
+    "SQL": "SELECT passenger_name, passenger_age FROM bookings WHERE seat_class = 'Business' ORDER BY passenger_age DESC",
+    "difficulty": "moderate",
+    "qtype": "order"
+  },
+  {
+    "question_id": 367,
+    "db_id": "travel",
+    "question": "Show the average age of bookings per seat class.",
+    "evidence": "",
+    "SQL": "SELECT seat_class, AVG(passenger_age) FROM bookings GROUP BY seat_class",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 368,
+    "db_id": "travel",
+    "question": "What is the average seats available of flights in each airline?",
+    "evidence": "",
+    "SQL": "SELECT airline, AVG(seats_available) FROM flights GROUP BY airline",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 369,
+    "db_id": "travel",
+    "question": "Show the number of flights per destination.",
+    "evidence": "",
+    "SQL": "SELECT destination, COUNT(*) FROM flights GROUP BY destination",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 370,
+    "db_id": "travel",
+    "question": "How many bookings are there in each seat class?",
+    "evidence": "",
+    "SQL": "SELECT seat_class, COUNT(*) FROM bookings GROUP BY seat_class",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 371,
+    "db_id": "travel",
+    "question": "How many flights are there in each airline?",
+    "evidence": "",
+    "SQL": "SELECT airline, COUNT(*) FROM flights GROUP BY airline",
+    "difficulty": "moderate",
+    "qtype": "group-by"
+  },
+  {
+    "question_id": 372,
+    "db_id": "travel",
+    "question": "Show passengers booked on Vistara flights who are older than 70.",
+    "evidence": "",
+    "SQL": "SELECT bookings.passenger_name FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.airline = 'Vistara' AND bookings.passenger_age > 70",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 373,
+    "db_id": "travel",
+    "question": "What is the average amount paid by passengers on flights to Coimbatore?",
+    "evidence": "",
+    "SQL": "SELECT AVG(bookings.amount) FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.destination = 'Coimbatore'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 374,
+    "db_id": "travel",
+    "question": "What is the average amount paid by passengers on flights to Bengaluru?",
+    "evidence": "",
+    "SQL": "SELECT AVG(bookings.amount) FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.destination = 'Bengaluru'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 375,
+    "db_id": "travel",
+    "question": "Show passengers booked on Air India flights who are older than 45.",
+    "evidence": "",
+    "SQL": "SELECT bookings.passenger_name FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.airline = 'Air India' AND bookings.passenger_age > 45",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 376,
+    "db_id": "travel",
+    "question": "Show passengers booked on Akasa Air flights who are older than 60.",
+    "evidence": "",
+    "SQL": "SELECT bookings.passenger_name FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.airline = 'Akasa Air' AND bookings.passenger_age > 60",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 377,
+    "db_id": "travel",
+    "question": "How many Premium Economy class bookings were made on flights from Mumbai to Madurai?",
+    "evidence": "",
+    "SQL": "SELECT COUNT(*) FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE bookings.seat_class = 'Premium Economy' AND flights.origin = 'Mumbai' AND flights.destination = 'Madurai'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  },
+  {
+    "question_id": 378,
+    "db_id": "travel",
+    "question": "What is the average amount paid by passengers on flights to Hyderabad?",
+    "evidence": "",
+    "SQL": "SELECT AVG(bookings.amount) FROM bookings JOIN flights ON bookings.flight_id = flights.flight_id WHERE flights.destination = 'Hyderabad'",
+    "difficulty": "challenging",
+    "qtype": "join"
+  }
+]
