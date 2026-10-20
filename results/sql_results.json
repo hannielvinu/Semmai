@@ -1,0 +1,692 @@
+{
+  "similarity_backend": "tfidf",
+  "thresholds": {
+    "similarity_sql": 0.4464,
+    "similarity_text": 0.6606,
+    "semmai_gate": 0.0
+  },
+  "similarity_roc_auc": {
+    "generated": {
+      "sim_sql": 0.6288172274433843,
+      "sim_text": 0.6207666738407825
+    },
+    "handwritten": {
+      "sim_sql": 0.6309953703703703,
+      "sim_text": 0.6074768518518519
+    },
+    "blind": {
+      "sim_sql": 0.610438550420168,
+      "sim_text": 0.6013524159663866
+    }
+  },
+  "sets": {
+    "generated_test": {
+      "pairs": 1319,
+      "correct_actions": 530,
+      "mismatched_actions": 789,
+      "mismatches_with_same_execution_result": 62,
+      "methods": {
+        "syntax_permission": {
+          "n": 1319,
+          "accuracy": 0.40181956027293403,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "far": 1.0,
+          "frr": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 789,
+          "tn": 530
+        },
+        "execution_nonempty": {
+          "n": 1319,
+          "accuracy": 0.4162244124336619,
+          "precision": 0.8064516129032258,
+          "recall": 0.031685678073510776,
+          "f1": 0.060975609756097573,
+          "far": 0.9683143219264893,
+          "frr": 0.011320754716981131,
+          "tp": 25,
+          "fp": 6,
+          "fn": 764,
+          "tn": 524
+        },
+        "similarity_sql": {
+          "n": 1319,
+          "accuracy": 0.5754359363153905,
+          "precision": 0.6943972835314092,
+          "recall": 0.5183776932826363,
+          "f1": 0.5936139332365747,
+          "far": 0.4816223067173637,
+          "frr": 0.33962264150943394,
+          "tp": 409,
+          "fp": 180,
+          "fn": 380,
+          "tn": 350
+        },
+        "similarity_text": {
+          "n": 1319,
+          "accuracy": 0.6194086429112965,
+          "precision": 0.6625141562853907,
+          "recall": 0.7414448669201521,
+          "f1": 0.6997607655502392,
+          "far": 0.2585551330798479,
+          "frr": 0.5622641509433962,
+          "tp": 585,
+          "fp": 298,
+          "fn": 204,
+          "tn": 232
+        },
+        "semmai_proof": {
+          "n": 1319,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 789,
+          "fp": 0,
+          "fn": 0,
+          "tn": 530
+        },
+        "semmai": {
+          "n": 1319,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 789,
+          "fp": 0,
+          "fn": 0,
+          "tn": 530
+        },
+        "exec_match_oracle": {
+          "n": 1319,
+          "accuracy": 0.9529946929492039,
+          "precision": 1.0,
+          "recall": 0.9214195183776933,
+          "f1": 0.9591029023746701,
+          "far": 0.07858048162230671,
+          "frr": 0.0,
+          "tp": 727,
+          "fp": 0,
+          "fn": 62,
+          "tn": 530
+        }
+      }
+    },
+    "handwritten": {
+      "pairs": 300,
+      "correct_actions": 120,
+      "mismatched_actions": 180,
+      "mismatches_with_same_execution_result": 14,
+      "methods": {
+        "syntax_permission": {
+          "n": 300,
+          "accuracy": 0.4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "far": 1.0,
+          "frr": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 180,
+          "tn": 120
+        },
+        "execution_nonempty": {
+          "n": 300,
+          "accuracy": 0.42333333333333334,
+          "precision": 0.8181818181818182,
+          "recall": 0.05,
+          "f1": 0.09424083769633508,
+          "far": 0.95,
+          "frr": 0.016666666666666666,
+          "tp": 9,
+          "fp": 2,
+          "fn": 171,
+          "tn": 118
+        },
+        "similarity_sql": {
+          "n": 300,
+          "accuracy": 0.59,
+          "precision": 0.6686390532544378,
+          "recall": 0.6277777777777778,
+          "f1": 0.64756446991404,
+          "far": 0.37222222222222223,
+          "frr": 0.4666666666666667,
+          "tp": 113,
+          "fp": 56,
+          "fn": 67,
+          "tn": 64
+        },
+        "similarity_text": {
+          "n": 300,
+          "accuracy": 0.6,
+          "precision": 0.6229508196721312,
+          "recall": 0.8444444444444444,
+          "f1": 0.7169811320754719,
+          "far": 0.15555555555555556,
+          "frr": 0.7666666666666667,
+          "tp": 152,
+          "fp": 92,
+          "fn": 28,
+          "tn": 28
+        },
+        "semmai_proof": {
+          "n": 300,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 180,
+          "fp": 0,
+          "fn": 0,
+          "tn": 120
+        },
+        "semmai": {
+          "n": 300,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 180,
+          "fp": 0,
+          "fn": 0,
+          "tn": 120
+        },
+        "exec_match_oracle": {
+          "n": 300,
+          "accuracy": 0.9533333333333334,
+          "precision": 1.0,
+          "recall": 0.9222222222222223,
+          "f1": 0.9595375722543353,
+          "far": 0.07777777777777778,
+          "frr": 0.0,
+          "tp": 166,
+          "fp": 0,
+          "fn": 14,
+          "tn": 120
+        }
+      }
+    },
+    "blind": {
+      "pairs": 398,
+      "correct_actions": 160,
+      "mismatched_actions": 238,
+      "mismatches_with_same_execution_result": 15,
+      "methods": {
+        "syntax_permission": {
+          "n": 398,
+          "accuracy": 0.4020100502512563,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "far": 1.0,
+          "frr": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 238,
+          "tn": 160
+        },
+        "execution_nonempty": {
+          "n": 398,
+          "accuracy": 0.44221105527638194,
+          "precision": 0.8333333333333334,
+          "recall": 0.08403361344537816,
+          "f1": 0.15267175572519087,
+          "far": 0.9159663865546218,
+          "frr": 0.025,
+          "tp": 20,
+          "fp": 4,
+          "fn": 218,
+          "tn": 156
+        },
+        "similarity_sql": {
+          "n": 398,
+          "accuracy": 0.5527638190954773,
+          "precision": 0.6666666666666666,
+          "recall": 0.5042016806722689,
+          "f1": 0.5741626794258373,
+          "far": 0.4957983193277311,
+          "frr": 0.375,
+          "tp": 120,
+          "fp": 60,
+          "fn": 118,
+          "tn": 100
+        },
+        "similarity_text": {
+          "n": 398,
+          "accuracy": 0.6105527638190955,
+          "precision": 0.6300940438871473,
+          "recall": 0.8445378151260504,
+          "f1": 0.7217235188509874,
+          "far": 0.15546218487394958,
+          "frr": 0.7375,
+          "tp": 201,
+          "fp": 118,
+          "fn": 37,
+          "tn": 42
+        },
+        "semmai_proof": {
+          "n": 398,
+          "accuracy": 0.9698492462311558,
+          "precision": 0.952,
+          "recall": 1.0,
+          "f1": 0.9754098360655737,
+          "far": 0.0,
+          "frr": 0.075,
+          "tp": 238,
+          "fp": 12,
+          "fn": 0,
+          "tn": 148
+        },
+        "semmai": {
+          "n": 398,
+          "accuracy": 0.9698492462311558,
+          "precision": 0.952,
+          "recall": 1.0,
+          "f1": 0.9754098360655737,
+          "far": 0.0,
+          "frr": 0.075,
+          "tp": 238,
+          "fp": 12,
+          "fn": 0,
+          "tn": 148
+        },
+        "exec_match_oracle": {
+          "n": 398,
+          "accuracy": 0.9623115577889447,
+          "precision": 1.0,
+          "recall": 0.9369747899159664,
+          "f1": 0.9674620390455532,
+          "far": 0.06302521008403361,
+          "frr": 0.0,
+          "tp": 223,
+          "fp": 0,
+          "fn": 15,
+          "tn": 160
+        }
+      }
+    }
+  },
+  "latency_ms": {
+    "mean": 2.5454751582822825,
+    "median": 2.0173635000446666,
+    "p95": 5.70182699993893
+  },
+  "per_type": {
+    "AGGREGATION_SWAP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.018867924528301886,
+      "similarity_sql": 0.5849056603773585,
+      "similarity_text": 0.7169811320754716,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9716981132075472,
+      "n": 106,
+      "label": 0
+    },
+    "COLUMN_SWAP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.2653061224489796,
+      "similarity_sql": 0.7653061224489796,
+      "similarity_text": 0.8979591836734694,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9795918367346939,
+      "n": 98,
+      "label": 0
+    },
+    "CONSTRAINT_ADD": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.044642857142857144,
+      "similarity_sql": 0.5267857142857143,
+      "similarity_text": 0.7142857142857143,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9285714285714286,
+      "n": 112,
+      "label": 0
+    },
+    "CONSTRAINT_DROP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.7757009345794392,
+      "similarity_text": 0.9065420560747663,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9719626168224299,
+      "n": 107,
+      "label": 0
+    },
+    "DATE_DRIFT": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.08955223880597014,
+      "similarity_sql": 0.6268656716417911,
+      "similarity_text": 0.835820895522388,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.7761194029850746,
+      "n": 67,
+      "label": 0
+    },
+    "ENTITY_SWAP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.9230769230769231,
+      "similarity_text": 1.0,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 13,
+      "label": 0
+    },
+    "GOLD": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 0.9851851851851852,
+      "similarity_sql": 0.6641975308641975,
+      "similarity_text": 0.3925925925925926,
+      "semmai_proof": 0.9851851851851852,
+      "semmai": 0.9851851851851852,
+      "exec_match_oracle": 1.0,
+      "n": 405,
+      "label": 1
+    },
+    "GROUP_SWAP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.8518518518518519,
+      "similarity_text": 0.5555555555555556,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 27,
+      "label": 0
+    },
+    "LIMIT_CHANGE": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.6176470588235294,
+      "similarity_text": 0.5882352941176471,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 34,
+      "label": 0
+    },
+    "LOGIC_AND_TO_OR": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.37777777777777777,
+      "similarity_text": 0.7111111111111111,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 90,
+      "label": 0
+    },
+    "NEGATION_FLIP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.019417475728155338,
+      "similarity_sql": 0.3592233009708738,
+      "similarity_text": 0.6893203883495146,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9805825242718447,
+      "n": 103,
+      "label": 0
+    },
+    "OPERATOR_BOUNDARY": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.009900990099009901,
+      "similarity_sql": 0.36633663366336633,
+      "similarity_text": 0.8910891089108911,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.49504950495049505,
+      "n": 101,
+      "label": 0
+    },
+    "OPERATOR_REVERSE": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.009615384615384616,
+      "similarity_sql": 0.375,
+      "similarity_text": 0.8173076923076923,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9903846153846154,
+      "n": 104,
+      "label": 0
+    },
+    "ORDER_FLIP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.0,
+      "similarity_sql": 0.5106382978723404,
+      "similarity_text": 0.6382978723404256,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9787234042553191,
+      "n": 47,
+      "label": 0
+    },
+    "PROJECTION_SWAP": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.021052631578947368,
+      "similarity_sql": 0.4105263157894737,
+      "similarity_text": 0.7157894736842105,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.9789473684210527,
+      "n": 95,
+      "label": 0
+    },
+    "REWRITE_ALIASES": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 0.9809523809523809,
+      "similarity_sql": 0.47619047619047616,
+      "similarity_text": 0.42857142857142855,
+      "semmai_proof": 0.9904761904761905,
+      "semmai": 0.9904761904761905,
+      "exec_match_oracle": 1.0,
+      "n": 105,
+      "label": 1
+    },
+    "REWRITE_BETWEEN": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 0.6666666666666666,
+      "similarity_sql": 0.3333333333333333,
+      "similarity_text": 0.0,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 3,
+      "label": 1
+    },
+    "REWRITE_BOUNDARY_EQUIVALENT": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 0.9629629629629629,
+      "similarity_sql": 0.5555555555555556,
+      "similarity_text": 0.07407407407407407,
+      "semmai_proof": 0.9629629629629629,
+      "semmai": 0.9629629629629629,
+      "exec_match_oracle": 1.0,
+      "n": 27,
+      "label": 1
+    },
+    "REWRITE_COUNT_KEY": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 1.0,
+      "similarity_sql": 0.6666666666666666,
+      "similarity_text": 0.38095238095238093,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 21,
+      "label": 1
+    },
+    "REWRITE_IN_SINGLE": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 1.0,
+      "similarity_sql": 0.7241379310344828,
+      "similarity_text": 0.29310344827586204,
+      "semmai_proof": 0.9827586206896551,
+      "semmai": 0.9827586206896551,
+      "exec_match_oracle": 1.0,
+      "n": 58,
+      "label": 1
+    },
+    "REWRITE_LITERAL_LEFT": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 1.0,
+      "similarity_sql": 0.7647058823529411,
+      "similarity_text": 0.23529411764705882,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 34,
+      "label": 1
+    },
+    "REWRITE_LOWERCASE": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 1.0,
+      "similarity_sql": 0.5966386554621849,
+      "similarity_text": 0.44537815126050423,
+      "semmai_proof": 0.9831932773109243,
+      "semmai": 0.9831932773109243,
+      "exec_match_oracle": 1.0,
+      "n": 119,
+      "label": 1
+    },
+    "REWRITE_REORDER_CONDITIONS": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 0.9444444444444444,
+      "similarity_sql": 0.6944444444444444,
+      "similarity_text": 0.2777777777777778,
+      "semmai_proof": 0.9722222222222222,
+      "semmai": 0.9722222222222222,
+      "exec_match_oracle": 1.0,
+      "n": 36,
+      "label": 1
+    },
+    "REWRITE_YEAR_FUNCTION": {
+      "syntax_permission": 1.0,
+      "execution_nonempty": 1.0,
+      "similarity_sql": 0.5,
+      "similarity_text": 0.0,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 1.0,
+      "n": 2,
+      "label": 1
+    },
+    "VALUE_DRIFT": {
+      "syntax_permission": 0.0,
+      "execution_nonempty": 0.08737864077669903,
+      "similarity_sql": 0.5339805825242718,
+      "similarity_text": 0.8252427184466019,
+      "semmai_proof": 1.0,
+      "semmai": 1.0,
+      "exec_match_oracle": 0.970873786407767,
+      "n": 103,
+      "label": 0
+    }
+  },
+  "per_difficulty": {
+    "simple": {
+      "similarity_text": {
+        "n": 526,
+        "accuracy": 0.6406844106463878,
+        "precision": 0.6590330788804071,
+        "recall": 0.8248407643312102,
+        "f1": 0.7326732673267325,
+        "far": 0.1751592356687898,
+        "frr": 0.6320754716981132,
+        "tp": 259,
+        "fp": 134,
+        "fn": 55,
+        "tn": 78
+      },
+      "semmai": {
+        "n": 526,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "far": 0.0,
+        "frr": 0.0,
+        "tp": 314,
+        "fp": 0,
+        "fn": 0,
+        "tn": 212
+      },
+      "n": 526
+    },
+    "moderate": {
+      "similarity_text": {
+        "n": 663,
+        "accuracy": 0.6063348416289592,
+        "precision": 0.6691542288557214,
+        "recall": 0.6775818639798489,
+        "f1": 0.6733416770963705,
+        "far": 0.3224181360201511,
+        "frr": 0.5,
+        "tp": 269,
+        "fp": 133,
+        "fn": 128,
+        "tn": 133
+      },
+      "semmai": {
+        "n": 663,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "far": 0.0,
+        "frr": 0.0,
+        "tp": 397,
+        "fp": 0,
+        "fn": 0,
+        "tn": 266
+      },
+      "n": 663
+    },
+    "challenging": {
+      "similarity_text": {
+        "n": 130,
+        "accuracy": 0.6,
+        "precision": 0.6477272727272727,
+        "recall": 0.7307692307692307,
+        "f1": 0.6867469879518072,
+        "far": 0.2692307692307692,
+        "frr": 0.5961538461538461,
+        "tp": 57,
+        "fp": 31,
+        "fn": 21,
+        "tn": 21
+      },
+      "semmai": {
+        "n": 130,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "far": 0.0,
+        "frr": 0.0,
+        "tp": 78,
+        "fp": 0,
+        "fn": 0,
+        "tn": 52
+      },
+      "n": 130
+    }
+  }
+}
