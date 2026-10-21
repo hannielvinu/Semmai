@@ -27,6 +27,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 import numpy as np
 from sklearn.model_selection import GroupKFold, cross_val_predict
 
@@ -196,7 +199,7 @@ def main():
             m: (sum(r[f"allow_{m}"] for r in rs) if lab == 1 else sum(not r[f"allow_{m}"] for r in rs)) / len(rs)
             for m in METHODS}}
     RES.mkdir(exist_ok=True)
-    (RES / "tools_results.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False))
+    (RES / "tools_results.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
     with open(RES / "tools_predictions.csv", "w", newline="", encoding="utf-8") as f:
         keys = ["id", "locale", "utt", "action", "label", "kind", "findings"] + [f"allow_{m}" for m in METHODS]
         w = csv.DictWriter(f, fieldnames=keys, extrasaction="ignore")
@@ -227,7 +230,7 @@ def main():
         md.append(f"| {k} | {v['n']} | {v['schema_validation']:.0%} | {v['similarity']:.0%} | "
                   f"{v['semmai_intent_only']:.0%} | {v['semmai_slots_only']:.0%} | {v['semmai_no_numeric']:.0%} | "
                   f"{v['semmai']:.0%} |")
-    (RES / "tools_results.md").write_text("\n".join(md))
+    (RES / "tools_results.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))
 
 

@@ -19,6 +19,9 @@ import random
 import re
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "massive_style"
 LOCALES = ["en-US", "ta-IN", "hi-IN", "fr-FR", "es-ES", "de-DE"]

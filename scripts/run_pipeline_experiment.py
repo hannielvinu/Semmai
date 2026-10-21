@@ -23,6 +23,9 @@ import sqlite3
 import sys
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -40,10 +43,10 @@ def same(a, b):
 
 
 def load_questions():
-    pairs = json.loads((DATA / "verification_pairs.json").read_text())
+    pairs = json.loads((DATA / "verification_pairs.json").read_text(encoding="utf-8"))
     test_ids = {p["question_id"] for p in pairs if p["split"] == "test"}
-    qs = [q for q in json.loads((DATA / "questions.json").read_text()) if q["question_id"] in test_ids]
-    qs += json.loads((DATA / "blind_test.json").read_text())
+    qs = [q for q in json.loads((DATA / "questions.json").read_text(encoding="utf-8")) if q["question_id"] in test_ids]
+    qs += json.loads((DATA / "blind_test.json").read_text(encoding="utf-8"))
     return qs
 
 
@@ -123,7 +126,7 @@ def with_ollama(model):
         rows.append({"question": q["question"], "gold": q["SQL"], "generated": sql, "exec_match": ok_exec,
                      "semmai": v.decision, "findings": [f.message for f in v.findings]})
         print(v.decision, ok_exec, sql)
-    (RES / f"ollama_{model.replace(':', '_')}.json").write_text(json.dumps(rows, indent=2))
+    (RES / f"ollama_{model.replace(':', '_')}.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
     n = len(rows)
     wrong = [r for r in rows if not r["exec_match"]]
     print(f"LLM execution accuracy: {1 - len(wrong) / n:.1%}; wrong queries blocked by Semmai: "
@@ -140,7 +143,7 @@ def main():
         with_ollama(args.ollama)
         return
     out = simulated([0.1, 0.2, 0.3, 0.4])
-    (RES / "pipeline_results.json").write_text(json.dumps(out, indent=2))
+    (RES / "pipeline_results.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
     md = ["# End-to-end pipeline experiment (Simulated LLM, 3 seeds)", "",
           "| LLM error rate | Pipeline | Correct answers | Wrong answers executed ↓ | Rejected (no answer) |",
           "|---|---|---|---|---|"]
@@ -150,7 +153,7 @@ def main():
             x = r[k]
             md.append(f"| {r['error_rate']:.0%} | {name} | {x['correct']:.1%} | {x['wrong_executed']:.1%} | "
                       f"{x['rejected']:.1%} |")
-    (RES / "pipeline_results.md").write_text("\n".join(md))
+    (RES / "pipeline_results.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))
 
 

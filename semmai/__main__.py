@@ -31,6 +31,8 @@ def main(argv=None):
         p.add_argument("--sqlite", default=None, help="path to any other SQLite database")
         p.add_argument("--json", action="store_true", help="print JSON")
     a = ap.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     schema = Schema(Path(a.sqlite).stem, a.sqlite) if a.sqlite else Schema.from_bird_style(DATA, a.db)
     if a.cmd == "intent":
         g = IntentExtractor(schema).extract(a.question)

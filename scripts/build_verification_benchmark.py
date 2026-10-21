@@ -26,6 +26,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -60,11 +63,11 @@ def main():
     rng = random.Random(args.seed)
     if args.bird_root:
         broot = Path(args.bird_root)
-        questions = json.loads((broot / "dev.json").read_text())
+        questions = json.loads((broot / "dev.json").read_text(encoding="utf-8"))
         db_path = lambda db: broot / "dev_databases" / db / f"{db}.sqlite"
         mk_schema = lambda db: Schema(db, db_path(db))
     else:
-        questions = json.loads(Path(args.questions).read_text())
+        questions = json.loads(Path(args.questions).read_text(encoding="utf-8"))
         mk_schema = lambda db: Schema.from_bird_style(args.data_root, db)
 
     schemas, cons = {}, {}
@@ -137,7 +140,7 @@ def main():
                 usage[kind] += 1
                 made += 1
 
-    Path(args.out).write_text(json.dumps(pairs, indent=1, ensure_ascii=False))
+    Path(args.out).write_text(json.dumps(pairs, indent=1, ensure_ascii=False), encoding="utf-8")
     print(f"wrote {len(pairs)} pairs -> {args.out}")
     print("labels:", Counter(p["label"] for p in pairs))
     print("kinds:", dict(Counter(p["kind"] for p in pairs)))

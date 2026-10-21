@@ -1,6 +1,9 @@
 """Draw the architecture diagram (docs/architecture.png)."""
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 import matplotlib
 
 matplotlib.use("Agg")

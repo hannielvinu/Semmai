@@ -28,6 +28,9 @@ import time
 from collections import defaultdict
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -78,7 +81,7 @@ def main():
 
     rows = []           # one row per (set, pair)
     for set_name, path in SETS.items():
-        pairs = json.loads(path.read_text())
+        pairs = json.loads(path.read_text(encoding="utf-8"))
         for p in pairs:
             s, v, con = ctx(p["db_id"])
             # --- syntax / permission
@@ -191,7 +194,7 @@ def main():
             per_diff[d]["n"] = len(rs)
     summary["per_difficulty"] = per_diff
 
-    (RES / f"{args.out_prefix}_results.json").write_text(json.dumps(summary, indent=2))
+    (RES / f"{args.out_prefix}_results.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     with open(RES / f"{args.out_prefix}_predictions.csv", "w", newline="", encoding="utf-8") as f:
         keys = ["set", "pair_id", "db_id", "split", "kind", "label", "difficulty", "exec_equal", "question", "sql",
                 "sim_text", "findings"] + [f"allow_{m}" for m in METHODS]
@@ -199,7 +202,7 @@ def main():
         w.writeheader()
         for r in rows:
             w.writerow({**r, "sim_text": round(r["sim_text"], 4)})
-    with open(RES / f"{args.out_prefix}_similarity_scores.csv" if args.out_prefix != "sql" else RES / "similarity_scores.csv", "w", newline="") as f:
+    with open(RES / f"{args.out_prefix}_similarity_scores.csv" if args.out_prefix != "sql" else RES / "similarity_scores.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["set", "label", "kind", "sim_text", "sim_sql"])
         for r in rows:
@@ -239,7 +242,7 @@ def main():
             md.append(f"| {k} | {p['n']} | {p['similarity_text']:.0%} | {p['semmai']:.0%} |")
     md += ["", f"Mean verification latency: {summary['latency_ms']['mean']:.2f} ms "
                f"(median {summary['latency_ms']['median']:.2f} ms, p95 {summary['latency_ms']['p95']:.2f} ms)."]
-    (RES / f"{args.out_prefix}_results.md").write_text("\n".join(md))
+    (RES / f"{args.out_prefix}_results.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))
 
 

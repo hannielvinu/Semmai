@@ -71,7 +71,7 @@ def get_tool_verifier():
     thr = 0.1
     p = RES / "tools_results.json"
     if p.exists():
-        thr = json.loads(p.read_text())["thresholds"]["intent"]
+        thr = json.loads(p.read_text(encoding="utf-8"))["thresholds"]["intent"]
     return ToolVerifier(intent_threshold=thr).fit([r for r in recs if r["partition"] == "train"])
 
 
@@ -143,6 +143,6 @@ with tab_res:
     for name in ("sql_results.md", "tools_results.md", "pipeline_results.md"):
         p = RES / name
         if p.exists():
-            st.markdown(p.read_text())
+            st.markdown(p.read_text(encoding="utf-8"))
     for fig in sorted((RES / "figures").glob("*.png")) if (RES / "figures").exists() else []:
         st.image(str(fig))

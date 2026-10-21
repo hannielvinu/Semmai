@@ -113,7 +113,7 @@ class Schema:
     def from_bird_style(cls, root: str | Path, db_id: str) -> "Schema":
         root = Path(root)
         meta_path = root / "schema_meta.json"
-        meta = json.loads(meta_path.read_text()).get(db_id) if meta_path.exists() else None
+        meta = json.loads(meta_path.read_text(encoding="utf-8")).get(db_id) if meta_path.exists() else None
         return cls(db_id, root / "databases" / db_id / f"{db_id}.sqlite", meta)
 
     def column(self, full: str) -> Optional[Column]:

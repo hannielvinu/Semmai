@@ -18,6 +18,9 @@ import sqlite3
 import sys
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -555,7 +558,7 @@ def main():
                           "difficulty": DIFF[qtype], "qtype": qtype})
             qid += 1
     out = DATA / "questions.json"
-    out.write_text(json.dumps(items, indent=2, ensure_ascii=False))
+    out.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
     from collections import Counter
     print(f"wrote {len(items)} questions -> {out}")
     print(Counter(x["qtype"] for x in items))

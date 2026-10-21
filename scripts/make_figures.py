@@ -8,6 +8,9 @@ import csv
 import json
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -38,7 +41,7 @@ def save(fig, name):
 
 
 def fig_methods():
-    s = json.loads((RES / "sql_results.json").read_text())
+    s = json.loads((RES / "sql_results.json").read_text(encoding="utf-8"))
     names = {"syntax_permission": "Syntax + permission", "execution_nonempty": "Execution sanity",
              "similarity_sql": "Similarity (SQL text)", "similarity_text": "Similarity (SQL meaning)",
              "semmai": "Semmai"}
@@ -72,7 +75,7 @@ def fig_methods():
 
 
 def fig_error_types():
-    s = json.loads((RES / "sql_results.json").read_text())
+    s = json.loads((RES / "sql_results.json").read_text(encoding="utf-8"))
     pt = {k: v for k, v in s["per_type"].items() if v["label"] == 0}
     kinds = sorted(pt, key=lambda k: pt[k]["semmai"])
     fig, ax = plt.subplots(figsize=(8, 5.2))
@@ -93,10 +96,10 @@ def fig_error_types():
 
 
 def fig_similarity():
-    rows = list(csv.DictReader(open(RES / "similarity_scores.csv")))
+    rows = list(csv.DictReader(open(RES / "similarity_scores.csv", encoding="utf-8")))
     pos = [float(r["sim_text"]) for r in rows if r["label"] == "1"]
     neg = [float(r["sim_text"]) for r in rows if r["label"] == "0"]
-    s = json.loads((RES / "sql_results.json").read_text())
+    s = json.loads((RES / "sql_results.json").read_text(encoding="utf-8"))
     fig, ax = plt.subplots(figsize=(7, 3.4))
     bins = np.linspace(0, 1, 41)
     ax.hist(pos, bins=bins, histtype="step", linewidth=2, color=BLUE, label="Correct SQL", density=True)
@@ -112,7 +115,7 @@ def fig_similarity():
 
 
 def fig_multilingual():
-    t = json.loads((RES / "tools_results.json").read_text())
+    t = json.loads((RES / "tools_results.json").read_text(encoding="utf-8"))
     locs = list(t["per_locale"])
     fig, ax = plt.subplots(figsize=(7.5, 3.4))
     x = np.arange(len(locs))
@@ -134,7 +137,7 @@ def fig_multilingual():
 
 
 def fig_pipeline():
-    p = json.loads((RES / "pipeline_results.json").read_text())
+    p = json.loads((RES / "pipeline_results.json").read_text(encoding="utf-8"))
     er = [r["error_rate"] * 100 for r in p]
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.4))
     series = [("baseline", "Generate → Execute", GRAY, "o"), ("semmai_block", "+ Semmai (reject)", ORANGE, "s"),

@@ -19,6 +19,9 @@ import sqlite3
 from datetime import date, timedelta
 from pathlib import Path
 
+if hasattr(__import__("sys").stdout, "reconfigure"):
+    __import__("sys").stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "bird_style"
 
@@ -318,7 +321,7 @@ def main() -> None:
         con.commit()
         con.close()
         print(f"built {db_id}: " + ", ".join(f"{t}={len(r)}" for t, r in rows.items()))
-    (OUT / "schema_meta.json").write_text(json.dumps(META, indent=2))
+    (OUT / "schema_meta.json").write_text(json.dumps(META, indent=2), encoding="utf-8")
     print("wrote schema_meta.json")
 
 
