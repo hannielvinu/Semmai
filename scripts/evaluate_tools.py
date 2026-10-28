@@ -230,6 +230,8 @@ def main():
         md.append(f"| {k} | {v['n']} | {v['schema_validation']:.0%} | {v['similarity']:.0%} | "
                   f"{v['semmai_intent_only']:.0%} | {v['semmai_slots_only']:.0%} | {v['semmai_no_numeric']:.0%} | "
                   f"{v['semmai']:.0%} |")
+    (ROOT / "models").mkdir(exist_ok=True)
+    ver.export(ROOT / "models" / "intent_model.json")   # lets the demo run without scikit-learn
     (RES / "tools_results.md").write_text("\n".join(md), encoding="utf-8")
     print("\n".join(md))
 

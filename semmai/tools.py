@@ -20,18 +20,15 @@ An agent turns a user utterance (any language) into a tool call:
 from __future__ import annotations
 
 import json
+import math
 import re
 import unicodedata
-from collections import defaultdict
+from collections import Counter, defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
-
 from .proof import Finding
+from .textfeat import char_wb_ngrams
 
 SLOT_RE = re.compile(r"\[\s*([\w_]+)\s*:\s*([^\]]+?)\s*\]")
 
@@ -89,15 +86,20 @@ class ToolVerifier:
     def __init__(self, intent_threshold: float = 0.35, numeric_coverage: bool = True):
         self.intent_threshold = intent_threshold
         self.numeric_coverage = numeric_coverage
-        self.clf = make_pipeline(
-            TfidfVectorizer(analyzer="char_wb", ngram_range=(1, 4), sublinear_tf=True, min_df=1),
-            LogisticRegression(C=20, max_iter=3000))
+        self.clf = None                  # scikit-learn pipeline (training) ...
+        self._plain = None               # ... or exported weights (plain-Python inference)
         self.allowed_slots = defaultdict(set)
         self.gazetteer = {}          # normalised value -> slot type
         self.intents = []
 
     # ------------------------------------------------------------- training
     def fit(self, records: list) -> "ToolVerifier":
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.pipeline import make_pipeline
+        self.clf = make_pipeline(
+            TfidfVectorizer(analyzer="char_wb", ngram_range=(1, 4), sublinear_tf=True, min_df=1),
+            LogisticRegression(C=20, max_iter=3000))
         X = [r["utt"] for r in records]
         y = [r["intent"] for r in records]
         self.clf.fit(X, y)
@@ -111,11 +113,52 @@ class ToolVerifier:
         return self
 
     def intent_probs(self, utt: str) -> dict:
+        if self._plain is not None:
+            return self._plain_probs(utt)
         p = self.clf.predict_proba([utt])[0]
-        return dict(zip(self.intents, p))
+        return dict(zip(self.intents, (float(x) for x in p)))
 
     def predict_intent(self, utt: str) -> str:
-        return self.clf.predict([utt])[0]
+        probs = self.intent_probs(utt)
+        return max(probs, key=probs.get)
+
+    # ------------------------------------------------- export / plain-Python load
+    def export(self, path) -> None:
+        """Save the trained model as JSON so it can run without scikit-learn."""
+        vec, lr = self.clf.steps[0][1], self.clf.steps[1][1]
+        vocab = sorted(vec.vocabulary_, key=vec.vocabulary_.get)
+        idx = [vec.vocabulary_[t] for t in vocab]
+        data = {"format": "semmai-intent-v1", "classes": self.intents,
+                "intent_threshold": self.intent_threshold, "numeric_coverage": self.numeric_coverage,
+                "vocab": vocab, "idf": [round(float(vec.idf_[i]), 5) for i in idx],
+                "coef": [[round(float(lr.coef_[c][i]), 4) for i in idx] for c in range(len(self.intents))],
+                "intercept": [round(float(b), 5) for b in lr.intercept_],
+                "allowed_slots": {k: sorted(v) for k, v in self.allowed_slots.items()},
+                "gazetteer": self.gazetteer}
+        Path(path).write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+    @classmethod
+    def load(cls, path) -> "ToolVerifier":
+        d = json.loads(Path(path).read_text(encoding="utf-8"))
+        v = cls(intent_threshold=d["intent_threshold"], numeric_coverage=d["numeric_coverage"])
+        v.intents = d["classes"]
+        index = {t: i for i, t in enumerate(d["vocab"])}
+        v._plain = {"index": index, "idf": d["idf"], "coef": d["coef"], "intercept": d["intercept"]}
+        v.allowed_slots = defaultdict(set, {k: set(x) for k, x in d["allowed_slots"].items()})
+        v.gazetteer = d["gazetteer"]
+        v._gaz = sorted(v.gazetteer.items(), key=lambda kv: -len(kv[0]))
+        return v
+
+    def _plain_probs(self, utt: str) -> dict:
+        P = self._plain
+        counts = Counter(t for t in char_wb_ngrams(utt.lower(), 1, 4) if t in P["index"])
+        feats = {P["index"][t]: (1.0 + math.log(c)) * P["idf"][P["index"][t]] for t, c in counts.items()}
+        n = math.sqrt(sum(x * x for x in feats.values())) or 1.0
+        z = [b + sum(w[i] * x / n for i, x in feats.items()) for w, b in zip(P["coef"], P["intercept"])]
+        m = max(z)
+        e = [math.exp(x - m) for x in z]
+        s = sum(e)
+        return {c: x / s for c, x in zip(self.intents, e)}
 
     # ------------------------------------------------------------ verify
     def detect_values(self, utt: str) -> list:
