@@ -1,6 +1,8 @@
 """Semmai local demo - runs on plain Python 3.9+ with NO pip installs.
 
     python app/server.py            ->  opens http://localhost:8000
+                                        /      Tamil chatbot with the live verification pipeline
+                                        /lab   SQL / tool-call verifier and evaluation results
 
 Everything (web server, SQLite, the verifier, the multilingual intent model)
 uses only the Python standard library.
@@ -27,11 +29,12 @@ from semmai.schema import Schema                           # noqa: E402
 from semmai.tools import ToolVerifier                      # noqa: E402
 from semmai.usig import canonicalize, values_equal         # noqa: E402
 from semmai.verifier import SemmaiVerifier                 # noqa: E402
+from semmai.chat import ChatPipeline, make_generator, make_translator   # noqa: E402
 
 DATA = ROOT / "data" / "bird_style"
 WEB = ROOT / "app" / "web"
 RES = ROOT / "results"
-DBS = ["hospital", "retail", "university", "finance", "travel"]
+DBS = ["hr", "hospital", "retail", "university", "finance", "travel"]
 
 SQL_EXAMPLES = [
     {"label": "Older than 60, but the SQL says ≥ 60", "db": "hospital", "question": "Show patients older than 60",
@@ -75,7 +78,64 @@ TOOL_EXAMPLES = [
 ]
 
 _verifiers: dict = {}
+_pipelines: dict = {}
+_backends: dict = {}
 _tool = None
+CHAT_DBS = ["hr", "hospital", "retail", "university"]
+DB_TA = {"hr": "நிறுவன ஊழியர்கள் (HR)", "hospital": "மருத்துவமனை", "retail": "கடை / விற்பனை",
+         "university": "பல்கலைக்கழகம்"}
+SUGGESTIONS = {
+    "hr": ["2022க்கு பிறகு சேர்ந்த ஊழியர்களை காட்டு", "பயிற்சியாளர்களைத் தவிர மற்ற ஊழியர்களைக் காட்டு",
+           "மேலாளர்களைத் தவிர மற்ற ஊழியர்களை நீக்கு", "விற்பனைத் துறையில் உள்ள ஊழியர்களின் சராசரி சம்பளம் என்ன?",
+           "அதிக சம்பளம் வாங்கும் 5 ஊழியர்களைக் காட்டு", "ஒவ்வொரு துறையிலும் எத்தனை ஊழியர்கள் உள்ளனர்?",
+           "சென்னையில் உள்ள பெண் பொறியாளர்கள் எத்தனை பேர்?"],
+    "hospital": ["60 வயதுக்கு மேற்பட்ட நோயாளிகளைக் காட்டு", "சென்னையைச் சேர்ந்த நோயாளிகள் எத்தனை பேர்?",
+                 "நரம்பியல் மருத்துவர்களின் சராசரி ஆலோசனைக் கட்டணம்", "ICU தவிர மற்ற வார்டுகளில் உள்ள நோயாளிகள்"],
+    "retail": ["5000 ரூபாய்க்குக் குறைவான மின்னணுப் பொருட்களைக் காட்டு", "மிகவும் மலிவான 5 பொருட்களைக் காட்டு",
+               "கோல்டு உறுப்பினர்களைத் தவிர மற்ற வாடிக்கையாளர்கள்", "2024க்குப் பிறகு செய்யப்பட்ட ஆர்டர்கள் எத்தனை?"],
+    "university": ["CGPA 9க்கு மேல் உள்ள மாணவர்கள்", "துறை வாரியாக மாணவர்களின் எண்ணிக்கை",
+                   "அதிக CGPA பெற்ற 3 மாணவர்கள்", "ECE துறையைத் தவிர மற்ற மாணவர்கள்"],
+}
+
+
+def pipeline(db: str) -> ChatPipeline:
+    with _lock:
+        if "translator" not in _backends:
+            _backends["translator"] = make_translator()
+            _backends["generator"] = make_generator()
+        if db not in _pipelines:
+            _pipelines[db] = ChatPipeline(Schema.from_bird_style(DATA, db), _backends["translator"],
+                                          _backends["generator"])
+        return _pipelines[db]
+
+
+def api_chat(body: dict) -> dict:
+    db = body.get("db", "hr")
+    if db not in DBS:
+        raise ValueError(f"unknown database '{db}'")
+    msg = (body.get("message") or "").strip()
+    if not msg:
+        raise ValueError("கேள்வியை உள்ளிடவும். (Type a question.)")
+    if len(msg) > 400:
+        raise ValueError("கேள்வி மிக நீளமாக உள்ளது (400 எழுத்துகளுக்குள்).")
+    greet = msg.lower().strip(" !.?")
+    if greet in ("hi", "hello", "வணக்கம்", "ஹாய்", "hey", "நன்றி", "thanks", "thank you"):
+        thanks = greet in ("நன்றி", "thanks", "thank you")
+        return {"chat_only": True, "answer": {"text": "மகிழ்ச்சி! வேறு ஏதாவது கேளுங்கள்." if thanks else
+                "வணக்கம்! நான் Semmai. தரவுத்தளத்திடம் தமிழில் கேள்வி கேளுங்கள் - AI உருவாக்கும் ஒவ்வொரு SQL-ஐயும் "
+                "இயக்குவதற்கு முன் அதன் பொருள் உங்கள் கேள்வியுடன் பொருந்துகிறதா என்று சரிபார்ப்பேன்."}}
+    mode = body.get("mistakes", "off")
+    if mode not in ("off", "random", "always"):
+        mode = "off"
+    out = pipeline(db).run(msg, mistake_mode=mode)
+    return out
+
+
+def api_chat_meta() -> dict:
+    p = pipeline("hr")
+    return {"dbs": [{"id": d, "ta": DB_TA[d]} for d in CHAT_DBS], "suggestions": SUGGESTIONS,
+            "backends": {"translator": p.translator.name, "llm": p.generator.name},
+            "schemas": {d: verifier(d).schema.describe() for d in CHAT_DBS}}
 _lock = threading.Lock()
 
 
@@ -246,8 +306,12 @@ class Handler(BaseHTTPRequestHandler):
         path = self.path.split("?")[0]
         if path == "/api/meta":
             return self._json(200, api_meta())
-        if path in ("/", "/index.html"):
-            f = WEB / "index.html"
+        if path == "/api/chat_meta":
+            return self._json(200, api_chat_meta())
+        if path in ("/", "/index.html", "/chat"):
+            f = WEB / "chat.html"
+        elif path in ("/lab", "/lab.html"):
+            f = WEB / "lab.html"
         elif path.startswith("/figures/"):
             f = RES / "figures" / Path(path).name
         else:
@@ -267,6 +331,8 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(200, api_verify(body))
             if self.path == "/api/tool":
                 return self._json(200, api_tool(body))
+            if self.path == "/api/chat":
+                return self._json(200, api_chat(body))
             return self._json(404, {"error": "unknown endpoint"})
         except json.JSONDecodeError as e:
             return self._json(400, {"error": f"The tool call is not valid JSON: {e.msg} (line {e.lineno})."})
@@ -284,7 +350,10 @@ def main():
     print("Loading Semmai ...")
     for db in DBS:
         verifier(db)
+    for db in CHAT_DBS:
+        pipeline(db)
     tool_verifier()
+    print(f"  Translator: {_backends['translator'].name}\n  SQL generator (LLM): {_backends['generator'].name}")
     srv = None
     for port in range(a.port, a.port + 20):
         try:

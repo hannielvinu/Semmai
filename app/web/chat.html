@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semmai · செம்மை</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Catamaran:wght@400;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --paper:#eef1f4; --surface:#ffffff; --ink:#13233a; --muted:#5b6878; --line:#d5dbe2; --soft:#f5f7f9;
+  --ok:#0f7b6c; --ok-bg:#e3f3ef; --bad:#b4232c; --bad-bg:#fbe9ea; --warn:#9a5b00; --warn-bg:#fdf1dc; --focus:#2a62c9;
+  --user:#13233a; --user-ink:#ffffff;
+  --sans:"Catamaran","Atkinson Hyperlegible","Nirmala UI","Latha",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root{--paper:#0f1724;--surface:#172233;--ink:#e6ecf3;--muted:#9aa8b8;--line:#2b394c;--soft:#1c2a3e;
+        --ok:#4cc3ad;--ok-bg:#12302c;--bad:#f07178;--bad-bg:#3a1c22;--warn:#e7b04a;--warn-bg:#3a2c12;--focus:#7aa7ff;
+        --user:#2a62c9;--user-ink:#ffffff}
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 var(--sans);display:flex;flex-direction:column}
+button,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+/* top bar */
+.top{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.logo b{font-size:24px;letter-spacing:-.01em}
+.logo span{color:var(--muted);font-size:14px}
+.ctl{display:flex;align-items:center;gap:8px;font-size:14px}
+.ctl label{color:var(--muted)}
+select{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.seg{display:inline-flex;background:var(--paper);border-radius:8px;padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:14px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:700;box-shadow:0 0 0 1px var(--line)}
+.lablink{font-size:14px;color:var(--muted)}
+
+/* layout */
+.wrap{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:0}
+.chat{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line)}
+.msgs{flex:1;overflow:auto;padding:24px 24px 8px}
+.panel{overflow:auto;padding:20px 22px 40px;background:var(--soft)}
+@media (max-width:700px){.logo span{display:none}.top{gap:10px;padding:10px 14px}.lablink{display:none}.msgs{padding:16px 14px 8px}.composer{padding:10px 14px 12px}.panel{padding:16px 14px 30px}}
+@media (max-width:980px){
+  .wrap{grid-template-columns:1fr}
+  .chat{border-right:0;min-height:70vh}
+  .panel{border-top:1px solid var(--line)}
+}
+
+/* messages */
+.hello{max-width:560px;margin:8vh auto 0;text-align:center}
+.hello h1{font-size:30px;line-height:1.25;margin:0 0 8px}
+.hello p{color:var(--muted);margin:0 0 20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chips button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;cursor:pointer;text-align:left}
+.chips button:hover{border-color:var(--ink)}
+.msg{display:flex;margin:14px 0}
+.msg.user{justify-content:flex-end}
+.bubble{max-width:min(640px,92%);border-radius:16px;padding:12px 16px}
+.user .bubble{background:var(--user);color:var(--user-ink);border-bottom-right-radius:4px}
+.bot .bubble{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px;width:100%}
+.bot .bubble.cur{box-shadow:0 0 0 2px var(--focus)}
+.answer{white-space:pre-line}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.badge{font-size:13px;border-radius:999px;padding:2px 10px;font-weight:600}
+.badge.ok{background:var(--ok-bg);color:var(--ok)} .badge.bad{background:var(--bad-bg);color:var(--bad)} .badge.warn{background:var(--warn-bg);color:var(--warn)}
+.showproc{border:0;background:none;color:var(--focus);cursor:pointer;padding:0;font-size:14px;margin-top:8px}
+.tbl{overflow:auto;max-height:280px;margin-top:10px;border:1px solid var(--line);border-radius:8px}
+table.rows{border-collapse:collapse;width:100%;font-size:14px}
+table.rows th,table.rows td{padding:5px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+table.rows th{position:sticky;top:0;background:var(--surface)}
+.typing{display:inline-flex;gap:5px;padding:4px 0}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:b 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,80%,100%{opacity:.25}40%{opacity:1}}
+
+/* composer */
+.composer{padding:12px 20px 16px;background:var(--surface);border-top:1px solid var(--line)}
+.box{display:flex;gap:10px;align-items:flex-end;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px 8px 8px 14px}
+.box textarea{flex:1;border:0;background:none;resize:none;max-height:140px;min-height:26px;line-height:1.5;outline:none;padding:4px 0}
+.send{border:0;background:var(--ink);color:var(--surface);border-radius:10px;padding:8px 16px;font-weight:700;cursor:pointer}
+.send:disabled{opacity:.5;cursor:wait}
+.foot{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* pipeline panel */
+.ph{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.ph h2{font-size:19px;margin:0}
+.ph span{color:var(--muted);font-size:13px}
+.flow{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:0 -4px 12px;padding:6px 4px;font-size:13px;position:sticky;top:-20px;background:var(--soft);z-index:2}
+.flow .n{padding:3px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.flow .n.done{border-color:var(--ok);color:var(--ok)} .flow .n.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-bg)}
+.flow .n.warn{border-color:var(--warn);color:var(--warn)}
+.flow .a{color:var(--muted)}
+.empty{color:var(--muted);border:2px dashed var(--line);border-radius:12px;padding:30px 20px;text-align:center}
+.steps{list-style:none;margin:0;padding:0;position:relative}
+.step{position:relative;padding:0 0 14px 34px}
+.step::before{content:"";position:absolute;left:11px;top:26px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.dot{position:absolute;left:0;top:2px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--surface);border:2px solid var(--line);color:var(--muted)}
+.step.done .dot{border-color:var(--ok);color:var(--ok)} .step.bad .dot{border-color:var(--bad);background:var(--bad);color:#fff} .step.warn .dot{border-color:var(--warn);color:var(--warn)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.step.bad .card{border-color:var(--bad)}
+.ct{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ct b{font-size:15px}
+.ct small{color:var(--muted);font-size:12px;white-space:nowrap}
+.sub{color:var(--muted);font-size:13px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:14px;margin-top:6px}
+.kv dt{color:var(--muted)} .kv dd{margin:0}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.gchip{font-size:13.5px;background:var(--paper);border-radius:6px;padding:2px 8px}
+.gchip.ent{background:var(--ink);color:var(--surface)}
+pre.sql{font:13px/1.5 var(--mono);white-space:pre-wrap;word-break:break-word;background:var(--paper);border-radius:8px;padding:8px 10px;margin:6px 0 0}
+.mist{margin-top:6px;font-size:13.5px;color:var(--bad);background:var(--bad-bg);border-radius:6px;padding:5px 9px}
+.en{font-size:14.5px;margin-top:4px}
+table.led{width:100%;border-collapse:separate;border-spacing:0 4px;font-size:13.5px;margin-top:6px}
+table.led th{font-size:12px;color:var(--muted);text-align:left;font-weight:600;padding:0 8px}
+table.led td{background:var(--paper);padding:5px 8px;vertical-align:top}
+table.led td:first-child{border-radius:6px 0 0 6px;color:var(--muted);white-space:nowrap}
+table.led td:last-child{border-radius:0 6px 6px 0}
+table.led tr.x td.does{background:var(--bad-bg);color:var(--bad);font-weight:700}
+table.led td.m{text-align:center;width:22px;padding:5px 2px}
+tr.o td.m{color:var(--ok)} tr.x td.m{color:var(--bad);font-weight:700}
+.verdict{margin-top:8px;font-weight:700;font-size:14.5px;border-radius:6px;padding:5px 10px}
+.verdict.ok{background:var(--ok-bg);color:var(--ok)} .verdict.bad{background:var(--bad-bg);color:var(--bad)}
+ul.checks{list-style:none;margin:6px 0 0;padding:0;font-size:14px}
+ul.checks li{display:flex;gap:8px;margin:3px 0}
+ul.checks li b{flex:none;width:18px;text-align:center}
+.ok-t{color:var(--ok)} .bad-t{color:var(--bad)}
+.attempt-h{font-size:13px;color:var(--muted);margin:2px 0 8px 34px;font-weight:700}
+@media (prefers-reduced-motion:no-preference){.step.new{animation:in .28s ease-out both}@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="logo"><b>செம்மை</b><span>Semmai: AI-இன் பதில் உங்கள் கேள்வியின் பொருளை மாற்றவில்லை என்பதைச் சரிபார்க்கிறது</span></div>
+  <div class="ctl"><label for="db">தரவுத்தளம்</label><select id="db"></select></div>
+  <div class="ctl"><span id="mlabel" style="color:var(--muted)">AI தவறுகள்</span>
+    <div class="seg" role="group" aria-labelledby="mlabel">
+      <button data-m="off" aria-pressed="true" title="AI makes no deliberate mistakes">இல்லை</button>
+      <button data-m="random" aria-pressed="false" title="Translator/LLM makes a realistic mistake about half the time">சில நேரம்</button>
+      <button data-m="always" aria-pressed="false" title="First attempt always contains a realistic mistake">எப்போதும்</button>
+    </div>
+  </div>
+  <a class="lablink" href="/lab">Lab &amp; results</a>
+</div>
+
+<div class="wrap">
+  <section class="chat" aria-label="Chat">
+    <div class="msgs" id="msgs" aria-live="polite">
+      <div class="hello" id="hello">
+        <h1>தரவுத்தளத்திடம் தமிழில் கேளுங்கள்</h1>
+        <p>AI உங்கள் கேள்வியை SQL ஆக மாற்றும். அந்த SQL உங்கள் கேள்வியின் பொருளையே கொண்டுள்ளதா என்று Semmai சரிபார்த்த பிறகே அது இயக்கப்படும். ஒவ்வொரு படியும் வலப்புறத்தில் தெரியும்.</p>
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+    <form class="composer" id="form">
+      <div class="box">
+        <textarea id="input" rows="1" placeholder="உங்கள் கேள்வியைத் தமிழில் தட்டச்சு செய்யுங்கள்… (English-உம் சரி)" aria-label="Your question"></textarea>
+        <button class="send" id="send" type="submit">அனுப்பு</button>
+      </div>
+      <div class="foot" id="foot"></div>
+    </form>
+  </section>
+
+  <aside class="panel" aria-label="Verification pipeline">
+    <div class="ph"><h2>செயல்முறை</h2><span id="ptime"></span></div>
+    <div id="pipeline"><div class="empty">ஒரு கேள்வி கேட்டதும், AI மற்றும் Semmai மேற்கொள்ளும் ஒவ்வொரு படியும் இங்கே வரிசையாகத் தோன்றும்.</div></div>
+  </aside>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let META = null, MODE = "off", busy = false;
+const results = [];
+
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  MODE = b.dataset.m;
+  document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+}));
+
+function fmt(v) {
+  if (typeof v === "number" && !Number.isInteger(v)) return v.toLocaleString("en-IN", {maximumFractionDigits: 2});
+  if (typeof v === "number") return v.toLocaleString("en-IN");
+  return v;
+}
+function tableHTML(cols, rows) {
+  if (!rows || !rows.length) return "";
+  return `<div class="tbl"><table class="rows"><thead><tr>${cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>` +
+    rows.map(r => `<tr>${r.map(v => `<td>${esc(fmt(v))}</td>`).join("")}</tr>`).join("") + `</tbody></table></div>`;
+}
+function addMsg(cls, html) {
+  $("#hello")?.remove();
+  const d = document.createElement("div"); d.className = "msg " + cls;
+  d.innerHTML = `<div class="bubble">${html}</div>`;
+  $("#msgs").append(d); $("#msgs").scrollTop = $("#msgs").scrollHeight;
+  return d;
+}
+
+/* ---------- pipeline rendering ---------- */
+function graphHTML(g) {
+  if (!g || !g.entity) return "";
+  let h = `<div class="gchips"><span class="gchip ent">${esc(g.entity)}</span>` +
+    g.constraints.map(c => `<span class="gchip" title="${esc(c.en)}">${esc(c.ta)}</span>`).join("") + `</div>`;
+  if (g.shape.length) h += `<dl class="kv">` + g.shape.map(s => `<dt>${esc(s.k)}</dt><dd>${esc(s.v)}</dd>`).join("") + `</dl>`;
+  return h;
+}
+function ledgerHTML(rows) {
+  if (!rows.length) return "";
+  return `<table class="led"><thead><tr><th></th><th>நீங்கள் கேட்டது</th><th></th><th>SQL செய்வது</th></tr></thead><tbody>` +
+    rows.map(r => `<tr class="${r.ok ? "o" : "x"}"><td>${esc(r.aspect)}</td><td>${esc(r.asked)}</td><td class="m">${r.ok ? "=" : "≠"}</td><td class="does">${esc(r.does)}</td></tr>`).join("") +
+    `</tbody></table>`;
+}
+function stepHTML(n, cls, title, en, ms, body) {
+  return `<li class="step ${cls} new"><div class="dot">${cls === "bad" ? "✕" : n}</div><div class="card">
+    <div class="ct"><b>${esc(title)}</b><small>${esc(en)}${ms != null ? " · " + ms + " ms" : ""}</small></div>${body}</div></li>`;
+}
+function buildSteps(r) {
+  const S = Object.fromEntries(r.steps.map(s => [s.key, s]));
+  const out = [];  // [html, flowKey, status]
+  let n = 1;
+  out.push([stepHTML(n++, "done", "உள்ளீடு", "Input", null,
+    `<div class="en">${esc(S.input.data.text)}</div><div class="sub">மொழி: ${esc(S.input.data.language)}</div>`), "in", "done"]);
+  out.push([stepHTML(n++, "done", "உங்கள் கேள்வியின் பொருள்", "User intent graph · Semmai", S.intent.ms,
+    graphHTML(S.intent.data.graph) + `<div class="sub" style="margin-top:6px">சீர்மொழி வடிவம்: ${esc(S.intent.data.canonical)}</div>`), "intent", "done"]);
+  for (const a of S.attempts.data) {
+    const head = S.attempts.data.length > 1 ? `<div class="attempt-h">முயற்சி ${a.n}</div>` : "";
+    const t = a.translation;
+    out.push([head + stepHTML(n++, t.mistake ? "warn" : "done", "AI மொழிபெயர்ப்பு", "Tamil → English · " + t.backend, t.ms,
+      `<div class="en">${esc(t.english)}</div>` + (t.mistake ? `<div class="mist">⚠ ${esc(t.mistake_ta || t.mistake)}</div>` : "")), "tr", t.mistake ? "warn" : "done"]);
+    out.push([stepHTML(n++, a.sql.error ? "bad" : "done", "AI உருவாக்கிய SQL", "LLM · " + a.sql.backend, a.sql.ms,
+      `<pre class="sql">${esc(a.sql.sql || a.sql.error)}</pre>`), "sql", "done"]);
+    out.push([stepHTML(n++, "done", "SQL-இன் பொருள்", "SQL intent graph", null,
+      a.action_graph ? graphHTML(a.action_graph) + `<div class="sub" style="margin-top:6px">${esc(a.verify.meaning_en)}</div>` : `<div class="sub">பகுப்பாய்வு செய்ய இயலவில்லை</div>`), "sqlint", "done"]);
+    const ok = a.verify.ok;
+    out.push([stepHTML(n++, ok ? "done" : "bad", "Semmai பொருள் சரிபார்ப்பு", "Intent ≟ SQL intent", a.verify.ms,
+      ledgerHTML(a.verify.ledger) +
+      (ok ? `<div class="verdict ok">✓ பொருள் பொருந்துகிறது - இயக்க அனுமதி</div>`
+          : `<div class="verdict bad">✕ பொருள் மாறியுள்ளது - தடுக்கப்பட்டது</div>` +
+            `<ul class="checks">` + a.verify.findings.map(f => `<li><b class="bad-t">✕</b><span>${esc(f.ta)}<br><span class="sub">${esc(f.message)}</span></span></li>`).join("") + `</ul>`) +
+      (a.verify.similarity != null ? `<div class="sub" style="margin-top:6px">ஒற்றுமை மதிப்பெண் (similarity): ${a.verify.similarity}</div>` : "")), "verify", ok ? "done" : "bad"]);
+  }
+  if (S.repair) out.push([stepHTML(n++, "warn", "Semmai சரிசெய்தல்", "Repair from intent graph", S.repair.ms,
+      `<pre class="sql">${esc(S.repair.data.sql)}</pre><div class="sub">${esc(S.repair.data.note)}</div>`), "verify", "warn"]);
+  const ex = S.execute;
+  out.push([stepHTML(n++, "done", ex.title, "Execute (read-only)", ex.ms,
+    `<pre class="sql">${esc(ex.data.sql)}</pre><div class="sub">${ex.data.dry_run ? "சோதனை ஓட்டம் - தரவு மாற்றப்படவில்லை" : "படிக்க மட்டும் இணைப்பில் இயக்கப்பட்டது"}</div>`), "exec", "done"]);
+  const fin = S.final;
+  out.push([stepHTML(n++, fin.status === "done" ? "done" : "warn", "இறுதிச் சரிபார்ப்பு", "Output intent ≟ user intent", fin.ms,
+    `<ul class="checks">` + fin.data.checks.map(c => `<li><b class="${c.ok ? "ok-t" : "bad-t"}">${c.ok ? "✓" : "✕"}</b><span>${esc(c.ta)}<br><span class="sub">${esc(c.en)}</span></span></li>`).join("") + `</ul>`), "final", fin.status === "done" ? "done" : "warn"]);
+  return out;
+}
+const FLOW = [["in", "உள்ளீடு"], ["intent", "நோக்கம்"], ["tr", "மொழிபெயர்ப்பு"], ["sql", "AI SQL"], ["verify", "சரிபார்ப்பு"], ["exec", "இயக்கம்"], ["final", "இறுதி"]];
+function flowHTML(states) {
+  return `<div class="flow">` + FLOW.map(([k, t], i) => `<span class="n ${states[k] || ""}">${t}${k === "verify" && states.blocked ? ` (${states.blocked} தடுப்பு)` : ""}</span>` + (i < FLOW.length - 1 ? `<span class="a">→</span>` : "")).join("") + `</div>`;
+}
+async function showPipeline(r, animate) {
+  const items = buildSteps(r);
+  const states = {};
+  $("#ptime").textContent = `மொத்தம் ${r.total_ms} ms · ${r.backends.translator} · ${r.backends.llm}`;
+  const host = $("#pipeline");
+  host.innerHTML = flowHTML(states) + `<ol class="steps" id="steps"></ol>`;
+  const ol = $("#steps");
+  for (const [html, key, st] of items) {
+    states[key] = (states[key] === "bad" && st === "done") ? "done" : (st === "bad" ? "bad" : (states[key] === "bad" ? "bad" : st));
+    if (key === "verify" && st === "bad") states.blocked = (states.blocked || 0) + 1;
+    if (key === "verify" && st === "done") states.verify = states.blocked ? "warn" : "done";
+    ol.insertAdjacentHTML("beforeend", html);
+    host.querySelector(".flow").outerHTML = flowHTML(states);
+    if (animate && !reduced) { await sleep(230); ol.lastElementChild.scrollIntoView({block: "nearest"}); }
+  }
+  if (!animate) host.scrollTop = 0;
+}
+
+/* ---------- chat ---------- */
+function answerHTML(r, idx) {
+  const a = r.answer, res = r.result || {};
+  let h = `<div class="answer">${esc(a.text)}</div>`;
+  if (res.rows && res.rows.length && !(res.rows.length === 1 && res.rows[0].length === 1 && !res.dry_run))
+    h += tableHTML(a.columns_ta || res.columns, res.rows);
+  const b = [];
+  if (r.blocked_attempts) b.push(`<span class="badge bad">✕ ${r.blocked_attempts} தவறான SQL தடுக்கப்பட்டது</span>`);
+  b.push(r.repaired ? `<span class="badge warn">Semmai சரிசெய்த SQL</span>` : `<span class="badge ok">✓ Semmai சரிபார்த்தது</span>`);
+  const fin = r.steps.find(s => s.key === "final");
+  if (fin) b.push(fin.status === "done" ? `<span class="badge ok">✓ பதிலின் பொருள் = கேள்வியின் பொருள்</span>` : `<span class="badge warn">இறுதிச் சரிபார்ப்பில் எச்சரிக்கை</span>`);
+  h += `<div class="badges">${b.join("")}</div><button class="showproc" data-i="${idx}" type="button">இந்தப் பதிலின் செயல்முறையைக் காண்க</button>`;
+  return h;
+}
+async function ask(text) {
+  if (busy || !text.trim()) return;
+  busy = true; $("#send").disabled = true;
+  addMsg("user", esc(text));
+  const wait = addMsg("bot", `<div class="typing" aria-label="processing"><i></i><i></i><i></i></div>`);
+  $("#pipeline").innerHTML = `<div class="empty">செயலாக்கப்படுகிறது…</div>`;
+  try {
+    const resp = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({message: text, db: $("#db").value, mistakes: MODE})});
+    const r = await resp.json();
+    if (!resp.ok) throw new Error(r.error || "பிழை");
+    if (r.chat_only) { wait.querySelector(".bubble").innerHTML = `<div class="answer">${esc(r.answer.text)}</div>`; return; }
+    results.push(r);
+    const idx = results.length - 1;
+    await showPipeline(r, true);
+    const bub = wait.querySelector(".bubble");
+    bub.innerHTML = answerHTML(r, idx);
+    document.querySelectorAll(".bot .bubble").forEach(x => x.classList.remove("cur"));
+    bub.classList.add("cur");
+    bub.querySelector(".showproc").onclick = () => {
+      document.querySelectorAll(".bot .bubble").forEach(x => x.classList.remove("cur"));
+      bub.classList.add("cur"); showPipeline(results[idx], false);
+    };
+  } catch (e) {
+    wait.querySelector(".bubble").innerHTML = `<div class="answer" style="color:var(--bad)">${esc(e.message)}</div>`;
+    $("#pipeline").innerHTML = `<div class="empty">${esc(e.message)}</div>`;
+  } finally {
+    busy = false; $("#send").disabled = false; $("#msgs").scrollTop = $("#msgs").scrollHeight; $("#input").focus();
+  }
+}
+$("#form").addEventListener("submit", e => { e.preventDefault(); const t = $("#input").value; $("#input").value = ""; autosize(); ask(t); });
+$("#input").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("#form").requestSubmit(); } });
+function autosize() { const t = $("#input"); t.style.height = "auto"; t.style.height = Math.min(t.scrollHeight, 140) + "px"; }
+$("#input").addEventListener("input", autosize);
+
+function renderChips() {
+  const c = $("#chips"); if (!c) return;
+  c.innerHTML = "";
+  for (const s of META.suggestions[$("#db").value] || []) {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = s; b.onclick = () => ask(s); c.append(b);
+  }
+}
+(async () => {
+  META = await (await fetch("/api/chat_meta")).json();
+  $("#db").innerHTML = META.dbs.map(d => `<option value="${d.id}">${esc(d.ta)}</option>`).join("");
+  $("#db").addEventListener("change", renderChips);
+  renderChips();
+  $("#foot").textContent = `மொழிபெயர்ப்பு: ${META.backends.translator} · SQL: ${META.backends.llm} · Enter = அனுப்பு`;
+  $("#input").focus();
+})();
+</script>
+</body>
+</html>
