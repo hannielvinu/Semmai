@@ -97,28 +97,41 @@ For tool calls, an intent model (character n-gram TF-IDF + logistic regression, 
 all six languages together) checks the requested action, and grounding / coverage / type checks
 verify every slot value against the utterance.
 
-## Quick start
+## Run it on your computer (no Anaconda, no pip installs)
+
+The demo needs **only Python 3.9 or newer** - every part of it (web server, database, verifier,
+multilingual model) uses the Python standard library.
+
+**Windows**
+
+1. If you don't have Python yet: download it from <https://www.python.org/downloads/>, run the
+   installer and tick **"Add python.exe to PATH"** (or run `winget install Python.Python.3.12`).
+2. Download this repository (green **Code** button → **Download ZIP**) and unzip it.
+3. Double-click **`start_demo.bat`**. Your browser opens **http://localhost:8000**.
+
+**macOS / Linux:** `./start_demo.sh` (or `python3 app/server.py`).
+
+| SQL check | Multilingual tool calls |
+|---|---|
+| ![SQL check](docs/screenshots/2_sql_value_drift_blocked.png) | ![Tool calls](docs/screenshots/5_tool_tamil_blocked.png) |
+
+The **Results** tab shows all evaluation tables and figures
+([screenshot](docs/screenshots/7_results.png)).
+
+Command line (also no installs needed):
 
 ```bash
-git clone https://github.com/hannielvinu/Semmai.git
-cd Semmai
-pip install -r requirements.txt          # numpy, pandas, scikit-learn, matplotlib (+ optional streamlit)
-
-# verify one query
 python -m semmai verify --db hospital "Show patients older than 60" "SELECT name FROM patients WHERE age >= 60"
 #  Decision : REJECT
 #  SQL means: list name of patients where age at least 60
 #  [critical] OPERATOR_MISMATCH: boundary/operator changed: expected 'age more than 60', got 'age at least 60'
 
-# see the intent graph Semmai extracts
 python -m semmai intent --db travel "Flights from Chennai to Delhi under 5000"
-
-# interactive demo (SQL + multilingual tool calls + results)
-streamlit run app/streamlit_app.py
-
-# reproduce every dataset, table and figure (~1 min on a laptop CPU), then run the tests
-./run_all.sh
 ```
+
+**Re-running the experiments** (rebuilds data, results, figures; ~1 minute) needs the scientific
+packages: `pip install -r requirements.txt`, then `run_all.bat` (Windows) or `./run_all.sh`.
+The older Streamlit demo is still available: `streamlit run app/streamlit_app.py`.
 
 Use it from Python:
 
@@ -160,7 +173,9 @@ semmai/                  the library
 scripts/                 dataset builders, evaluations, figures
 data/                    databases, questions, benchmarks (see data/README.md)
 results/                 result tables (.md/.json), per-item predictions (.csv), figures
-app/streamlit_app.py     interactive demo
+app/server.py            local web demo (standard library only) + app/web/index.html
+app/streamlit_app.py     alternative Streamlit demo
+models/intent_model.json exported multilingual intent model (runs without scikit-learn)
 tests/                   unit tests (python -m unittest discover -s tests)
 docs/REPORT.md           full project report
 ```

@@ -130,5 +130,29 @@ class TestTools(unittest.TestCase):
         self.assertFalse(r.allowed)
 
 
+class TestPlainPythonDemo(unittest.TestCase):
+    """The demo must run with only the standard library (exported intent model)."""
+
+    def test_exported_model_matches(self):
+        model = ROOT / "models" / "intent_model.json"
+        self.assertTrue(model.exists(), "run scripts/evaluate_tools.py to export the model")
+        v = ToolVerifier.load(model)
+        self.assertEqual(v.predict_intent("turn off the lights in the kitchen"), "iot_hue_lightoff")
+        self.assertFalse(v.verify("नाळ", {"intent": "nope", "slots": {}}).allowed)
+
+    def test_server_api(self):
+        sys.path.insert(0, str(ROOT / "app"))
+        import server
+        r = server.api_verify({"db": "hospital", "question": "Show patients older than 60",
+                               "sql": "SELECT name FROM patients WHERE age > 60"})
+        self.assertEqual(r["decision"], "ALLOW")
+        self.assertTrue(r["result"]["rows"])
+        r = server.api_verify({"db": "hospital", "question": "Show patients older than 60",
+                               "sql": "SELECT name FROM patients WHERE age >= 60"})
+        self.assertEqual(r["decision"], "REJECT")
+        self.assertIsNone(r["result"])                      # blocked queries are never executed
+        self.assertIn(False, [row["ok"] for row in r["ledger"]])
+
+
 if __name__ == "__main__":
     unittest.main()

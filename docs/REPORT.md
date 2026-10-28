@@ -443,3 +443,10 @@ pip install -r requirements.txt
 
 All random processes use fixed seeds; re-running produces identical data and metrics (only the
 latency measurements vary).
+
+### Running the demo
+
+The local demo needs only Python 3.9+ (standard library): double-click `start_demo.bat` on Windows,
+or run `python app/server.py`, and open <http://localhost:8000>. The multilingual intent model is
+exported to `models/intent_model.json` by `scripts/evaluate_tools.py` and evaluated in plain Python;
+its decisions are identical to the scikit-learn model on all 2,812 benchmark tool calls.
