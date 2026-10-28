@@ -261,7 +261,7 @@ META = {
                                "salary": ["salary", "salaries", "pay", "earning", "earns", "paid", "income"],
                                "join_date": ["joined", "join date", "joining date", "joining", "hired"],
                                "experience_years": ["experience", "years of experience", "experienced"]}},
-        "departments": {"noun": ["department", "departments"], "name_col": "dept_name",
+        "departments": {"noun": ["departments"], "name_col": "dept_name",
                         "cols": {"dept_name": ["department name", "name"], "head": ["head"],
                                  "location": ["location", "located"], "budget": ["budget"]}},
     },

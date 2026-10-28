@@ -71,7 +71,6 @@
     },
     "departments": {
       "noun": [
-        "department",
         "departments"
       ],
       "name_col": "dept_name",
