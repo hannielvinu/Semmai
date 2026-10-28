@@ -217,10 +217,54 @@ def build_travel(rng):
     return ddl, rows
 
 
+# ---------------------------------------------------------------- hr (the project story)
+def build_hr(rng):
+    ddl = """
+    CREATE TABLE departments (dept_name TEXT PRIMARY KEY, head TEXT, location TEXT, budget REAL);
+    CREATE TABLE employees (emp_id INTEGER PRIMARY KEY, name TEXT, gender TEXT, age INTEGER,
+        department TEXT, role TEXT, city TEXT, salary REAL, join_date DATE, experience_years INTEGER,
+        FOREIGN KEY(department) REFERENCES departments(dept_name));
+    """
+    rows = {"departments": [], "employees": []}
+    depts = ["Engineering", "Sales", "HR", "Finance", "Marketing", "Support"]
+    for d in depts:
+        rows["departments"].append((d, person(rng), rng.choice(CITIES[:6]), money(rng, 2_000_000, 20_000_000, 100000)))
+    roles = [("Intern", (12000, 25000), (0, 1)), ("Engineer", (40000, 120000), (1, 12)),
+             ("Analyst", (35000, 90000), (1, 10)), ("Executive", (25000, 60000), (0, 8)),
+             ("Team Lead", (90000, 180000), (5, 15)), ("Manager", (120000, 300000), (8, 25))]
+    weights = [12, 30, 18, 20, 12, 8]
+    for i in range(1, 601):
+        role, (lo, hi), (elo, ehi) = rng.choices(roles, weights=weights)[0]
+        exp = rng.randint(elo, ehi)
+        age = max(21, min(60, 21 + exp + rng.randint(0, 6)))
+        dept = rng.choice(depts)
+        if role == "Engineer" and rng.random() < 0.7:
+            dept = "Engineering"
+        rows["employees"].append((i, person(rng), rng.choice(["Male", "Female"]), age, dept, role,
+                                  rng.choice(CITIES), money(rng, lo, hi, 500),
+                                  rdate(rng, date(2015, 1, 1), date(2025, 12, 31)), exp))
+    return ddl, rows
+
+
 # --------------------------------------------------------- schema metadata
 # Human-written descriptions and synonyms (BIRD ships similar
 # database_description CSV files). Semmai uses them for schema linking.
 META = {
+    "hr": {
+        "employees": {"noun": ["employee", "employees", "staff", "worker", "workers", "people", "person"],
+                      "name_col": "name",
+                      "cols": {"name": ["name", "names"], "gender": ["gender", "sex"],
+                               "age": ["age", "aged", "years old", "old"],
+                               "department": ["department", "dept", "team"],
+                               "role": ["role", "designation", "position", "post", "job title"],
+                               "city": ["city", "from", "based", "located", "living", "lives"],
+                               "salary": ["salary", "salaries", "pay", "earning", "earns", "paid", "income"],
+                               "join_date": ["joined", "join date", "joining date", "joining", "hired"],
+                               "experience_years": ["experience", "years of experience", "experienced"]}},
+        "departments": {"noun": ["department", "departments"], "name_col": "dept_name",
+                        "cols": {"dept_name": ["department name", "name"], "head": ["head"],
+                                 "location": ["location", "located"], "budget": ["budget"]}},
+    },
     "hospital": {
         "patients": {"noun": ["patient", "patients"], "name_col": "name",
                      "cols": {"name": ["name", "names"], "age": ["age", "aged", "years old", "old"],
@@ -302,7 +346,7 @@ META = {
 }
 
 BUILDERS = {"hospital": build_hospital, "retail": build_retail, "university": build_university,
-            "finance": build_finance, "travel": build_travel}
+            "finance": build_finance, "travel": build_travel, "hr": build_hr}
 
 
 def main() -> None:
