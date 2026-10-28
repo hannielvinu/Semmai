@@ -372,6 +372,10 @@ class IntentExtractor:
         elif shape.get("limit") is not None:
             g.limit = shape["limit"]
         g.notes = notes
+        if toks and toks[0].text in ("delete", "remove", "erase"):
+            g.action = "delete"
+            g.projections = []
+            g.order_by, g.limit, g.group_by = [], None, []
         return g
 
     # ----------------------------------------------------------- value linking

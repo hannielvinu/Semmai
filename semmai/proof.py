@@ -62,6 +62,11 @@ def prove(intent: USIG, action: USIG, schema: Schema) -> list:
     A = canonicalize(action, types)
     F: list[Finding] = []
 
+    # ---------------------------------------------------------------- action
+    if getattr(I, "action", "select") != getattr(A, "action", "select"):
+        F.append(Finding("ACTION_MISMATCH", "critical",
+                         f"request asks to {I.action.upper()} but the action performs {A.action.upper()}"))
+
     # ---------------------------------------------------------------- entity
     if I.primary_entity and I.primary_entity not in A.entities:
         F.append(Finding("WRONG_ENTITY", "critical",
@@ -146,7 +151,7 @@ def prove(intent: USIG, action: USIG, schema: Schema) -> list:
                              f"action aggregates {y[0].upper()}({y[1].split('.')[-1]}) but the request asks for a list"))
 
     # ------------------------------------------------------------ projection
-    if not i_aggs:
+    if not i_aggs and getattr(A, "action", "select") != "delete" and getattr(I, "action", "select") != "delete":
         prim = I.primary_entity
         ident = set()
         if prim and prim in schema.tables:

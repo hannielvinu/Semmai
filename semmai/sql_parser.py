@@ -104,6 +104,20 @@ class Parser:
     # -------------------------------------------------------------- grammar
     def parse(self) -> USIG:
         g = USIG()
+        if self.peek() == ("id", "DELETE") or (self.peek()[0] == "id" and str(self.peek()[1]).lower() == "delete"):
+            self.i += 1
+            self.take("kw", "from")
+            self._table_ref()
+            g.action = "delete"
+            g.entities = set(self.tables)
+            g.primary_entity = self.tables[0]
+            if self.accept("kw", "where"):
+                g.constraints, g.has_or = self._where(g)
+            if self.peek()[0] != "eof":
+                raise UnsupportedSQL(f"unsupported trailing SQL near {self.peek()[1]!r}")
+            return g
+        if self.peek()[0] == "id" and str(self.peek()[1]).lower() in ("update", "insert", "drop", "alter", "create"):
+            raise UnsupportedSQL(f"{str(self.peek()[1]).upper()} statements are not supported")
         self.take("kw", "select")
         g.distinct = self.accept("kw", "distinct")
         raw_items = self._select_items()
@@ -423,8 +437,11 @@ def render_sql(g: USIG, schema: Schema, aliases: bool = False, between: bool = F
         return f"{a.upper()}({col(c)})" if a else col(c)
 
     sel = ", ".join(proj(a, c) for a, c in g.projections) or "*"
-    sql = "SELECT " + ("DISTINCT " if g.distinct else "") + sel
-    sql += f" FROM {tables[0]}" + (f" AS {al[tables[0]]}" if aliases else "")
+    if getattr(g, "action", "select") == "delete":
+        sql = f"DELETE FROM {tables[0]}"
+    else:
+        sql = "SELECT " + ("DISTINCT " if g.distinct else "") + sel
+        sql += f" FROM {tables[0]}" + (f" AS {al[tables[0]]}" if aliases else "")
     placed = {tables[0]}
     for t in tables[1:]:
         j = next((jj for jj in g.joins if any(x.startswith(t + ".") for x in jj)

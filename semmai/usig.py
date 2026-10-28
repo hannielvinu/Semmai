@@ -62,6 +62,7 @@ class USIG:
     has_or: bool = False
     primary_entity: Optional[str] = None
     notes: list = field(default_factory=list)
+    action: str = "select"          # select | delete
 
     # ------------------------------------------------------------ helpers
     def to_dict(self) -> dict:
@@ -76,12 +77,13 @@ class USIG:
             "limit": self.limit,
             "distinct": self.distinct,
             "has_or": self.has_or,
+            "action": self.action,
         }
 
     def copy(self) -> "USIG":
         return USIG(set(self.entities), list(self.projections), list(self.constraints), list(self.joins),
                     list(self.group_by), list(self.order_by), self.limit, self.distinct, self.has_or,
-                    self.primary_entity, list(self.notes))
+                    self.primary_entity, list(self.notes), self.action)
 
     def aggregates(self) -> set:
         return {a for a, _ in self.projections if a}
