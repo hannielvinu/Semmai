@@ -11,6 +11,7 @@ python scripts\generate_massive_style.py || exit /b 1
 python scripts\evaluate_sql.py || exit /b 1
 python scripts\evaluate_tools.py || exit /b 1
 python scripts\run_pipeline_experiment.py || exit /b 1
+python scripts\evaluate_tamil.py || exit /b 1
 python scripts\make_figures.py || exit /b 1
 python scripts\make_architecture.py || exit /b 1
 python -m unittest discover -s tests || exit /b 1

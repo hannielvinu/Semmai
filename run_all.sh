@@ -11,6 +11,7 @@ python scripts/generate_massive_style.py
 python scripts/evaluate_sql.py
 python scripts/evaluate_tools.py
 python scripts/run_pipeline_experiment.py
+python scripts/evaluate_tamil.py
 python scripts/make_figures.py
 python -m unittest discover -s tests
 python scripts/make_architecture.py

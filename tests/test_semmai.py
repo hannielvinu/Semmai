@@ -154,5 +154,49 @@ class TestPlainPythonDemo(unittest.TestCase):
         self.assertIn(False, [row["ok"] for row in r["ledger"]])
 
 
+class TestTamil(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        from semmai.tamil import TamilParser
+        from semmai.chat import ChatPipeline
+        cls.s = Schema.from_bird_style(DATA, "hr")
+        cls.tp = TamilParser(cls.s)
+        cls.pipe = ChatPipeline(cls.s)
+
+    def test_after_vs_from(self):
+        from semmai.tamil import render_english
+        self.assertIn("after 2022", render_english(self.tp.parse("2022க்கு பிறகு சேர்ந்த ஊழியர்களை காட்டு")))
+        self.assertIn("since 2022", render_english(self.tp.parse("2022 முதல் சேர்ந்த ஊழியர்களைக் காட்டு")))
+
+    def test_except_and_suffixes(self):
+        f = self.tp.parse("சென்னையைத் தவிர மற்ற நகரங்களில் உள்ள மேலாளர்கள்")
+        got = {(c.op, c.values) for c in f.clauses}
+        self.assertIn(("!=", ("Chennai",)), got)
+        self.assertIn(("=", ("Manager",)), got)
+
+    def test_lakh_and_top_k(self):
+        f = self.tp.parse("1 லட்சத்திற்கு மேல் சம்பளம் பெறும் ஊழியர்கள் எத்தனை பேர்?")
+        self.assertEqual((f.op, f.clauses[0].op, f.clauses[0].values), ("count", ">", (100000.0,)))
+        f = self.tp.parse("அதிக சம்பளம் வாங்கும் 5 ஊழியர்களைக் காட்டு")
+        self.assertEqual((f.order_col, f.order_dir, f.limit), ("salary", "DESC", 5))
+
+    def test_pipeline_blocks_translation_mistake(self):
+        r = self.pipe.run("2022க்கு பிறகு சேர்ந்த ஊழியர்களை காட்டு", mistake_mode="always", seed=1,
+                          preferred_mistake="AFTER_BECOMES_FROM")
+        att = next(s for s in r["steps"] if s["key"] == "attempts")["data"]
+        self.assertFalse(att[0]["verify"]["ok"])           # 'after' -> 'from' was caught
+        self.assertIn("> '2022-12-31'", r["final_sql"])     # the executed query is the right one
+        self.assertTrue(all(c["ok"] for c in next(s for s in r["steps"] if s["key"] == "final")["data"]["checks"]))
+
+    def test_delete_is_dry_run_and_except_kept(self):
+        r = self.pipe.run("மேலாளர்களைத் தவிர மற்ற ஊழியர்களை நீக்கு", mistake_mode="always", seed=2,
+                          preferred_mistake="EXCEPT_DROPPED")
+        self.assertIn("role != 'Manager'", r["final_sql"])
+        self.assertTrue(r["result"]["dry_run"])
+        import sqlite3
+        n = sqlite3.connect(self.s.db_path).execute("SELECT COUNT(*) FROM employees").fetchone()[0]
+        self.assertEqual(n, 600)                              # nothing was deleted
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -159,7 +159,55 @@ def fig_pipeline():
     save(fig, "pipeline.png")
 
 
+def fig_tamil():
+    p = RES / "tamil_results.json"
+    if not p.exists():
+        return
+    t = json.loads(p.read_text(encoding="utf-8"))
+    fig, axes = plt.subplots(1, 2, figsize=(10, 3.5))
+    V = t["verification"]["blind"]["methods"]
+    names = [("syntax_permission", "Syntax +\npermission"), ("similarity_tamil_vs_sql", "Similarity\n(Tamil vs SQL)"),
+             ("similarity_translation_vs_sql", "Similarity\n(translation vs SQL)"), ("semmai", "Semmai")]
+    x = np.arange(len(names))
+    far = [V[k]["far"] * 100 for k, _ in names]
+    acc = [V[k]["accuracy"] * 100 for k, _ in names]
+    ax = axes[0]
+    w = 0.38
+    ax.bar(x - w / 2, acc, w - 0.04, color=[BLUE if k == "semmai" else GRAY for k, _ in names], label="Accuracy")
+    ax.bar(x + w / 2, far, w - 0.04, color=[ORANGE] * len(names), label="Wrong SQL let through")
+    for i, (a, f_) in enumerate(zip(acc, far)):
+        ax.text(i - w / 2, a + 2, f"{a:.0f}", ha="center", fontsize=8, color=INK2)
+        ax.text(i + w / 2, f_ + 2, f"{f_:.0f}", ha="center", fontsize=8, color=INK2)
+    ax.set_xticks(x, [n for _, n in names], fontsize=8.5)
+    ax.set_ylim(0, 128)
+    ax.set_yticks([0, 20, 40, 60, 80, 100])
+    ax.set_ylabel("%")
+    ax.set_title("Verifying SQL against Tamil requests (blind set)")
+    ax.grid(axis="x", visible=False)
+    ax.legend(fontsize=8, loc="upper center", ncol=2)
+    ax = axes[1]
+    E = t["end_to_end"]
+    labels = [f"AI wrong {e['p']:.0%}" for e in E]
+    x = np.arange(len(E))
+    ax.bar(x - w / 2, [e["without_semmai"]["wrong"] * 100 for e in E], w - 0.04, color=GRAY, label="Without Semmai")
+    ax.bar(x + w / 2, [e["with_semmai"]["wrong"] * 100 for e in E], w - 0.04, color=BLUE, label="With Semmai")
+    for i, e in enumerate(E):
+        ax.text(i - w / 2, e["without_semmai"]["wrong"] * 100 + 1.5, f"{e['without_semmai']['wrong'] * 100:.1f}%",
+                ha="center", fontsize=8, color=INK2)
+        ax.text(i + w / 2, e["with_semmai"]["wrong"] * 100 + 1.5, f"{e['with_semmai']['wrong'] * 100:.1f}%",
+                ha="center", fontsize=8, color=INK2)
+    ax.set_xticks(x, labels)
+    ax.set_ylim(0, 50)
+    ax.set_ylabel("Wrong answers shown to the user (%)")
+    ax.set_title("Tamil chatbot, end to end")
+    ax.grid(axis="x", visible=False)
+    ax.legend(fontsize=8, loc="upper left")
+    fig.tight_layout()
+    save(fig, "tamil_results.png")
+
+
 if __name__ == "__main__":
+    fig_tamil()
     fig_methods()
     fig_error_types()
     fig_similarity()

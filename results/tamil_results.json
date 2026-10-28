@@ -1,0 +1,370 @@
+{
+  "intent": {
+    "dev": {
+      "n": 48,
+      "exact": 48,
+      "accuracy": 1.0,
+      "failures": []
+    },
+    "dev2": {
+      "n": 28,
+      "exact": 28,
+      "accuracy": 1.0,
+      "failures": []
+    },
+    "blind": {
+      "n": 50,
+      "exact": 50,
+      "accuracy": 1.0,
+      "failures": [],
+      "first_run_exact": 49,
+      "first_run_accuracy": 0.98
+    }
+  },
+  "verification": {
+    "blind": {
+      "pairs": 249,
+      "correct": 100,
+      "mismatched": 149,
+      "methods": {
+        "syntax_permission": {
+          "n": 249,
+          "accuracy": 0.40160642570281124,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "far": 1.0,
+          "frr": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 149,
+          "tn": 100
+        },
+        "similarity_tamil_vs_sql": {
+          "n": 249,
+          "accuracy": 0.5261044176706827,
+          "precision": 0.6347826086956522,
+          "recall": 0.4899328859060403,
+          "f1": 0.5530303030303031,
+          "far": 0.5100671140939598,
+          "frr": 0.42,
+          "tp": 73,
+          "fp": 42,
+          "fn": 76,
+          "tn": 58
+        },
+        "similarity_translation_vs_sql": {
+          "n": 249,
+          "accuracy": 0.6184738955823293,
+          "precision": 0.7327586206896551,
+          "recall": 0.5704697986577181,
+          "f1": 0.6415094339622641,
+          "far": 0.42953020134228187,
+          "frr": 0.31,
+          "tp": 85,
+          "fp": 31,
+          "fn": 64,
+          "tn": 69
+        },
+        "semmai": {
+          "n": 249,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 149,
+          "fp": 0,
+          "fn": 0,
+          "tn": 100
+        }
+      }
+    },
+    "all": {
+      "pairs": 627,
+      "correct": 252,
+      "mismatched": 375,
+      "methods": {
+        "syntax_permission": {
+          "n": 627,
+          "accuracy": 0.4019138755980861,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "far": 1.0,
+          "frr": 0.0,
+          "tp": 0,
+          "fp": 0,
+          "fn": 375,
+          "tn": 252
+        },
+        "similarity_tamil_vs_sql": {
+          "n": 627,
+          "accuracy": 0.543859649122807,
+          "precision": 0.6352583586626139,
+          "recall": 0.5573333333333333,
+          "f1": 0.59375,
+          "far": 0.44266666666666665,
+          "frr": 0.47619047619047616,
+          "tp": 209,
+          "fp": 120,
+          "fn": 166,
+          "tn": 132
+        },
+        "similarity_translation_vs_sql": {
+          "n": 627,
+          "accuracy": 0.6347687400318979,
+          "precision": 0.7552447552447552,
+          "recall": 0.576,
+          "f1": 0.6535552193645991,
+          "far": 0.424,
+          "frr": 0.2777777777777778,
+          "tp": 216,
+          "fp": 70,
+          "fn": 159,
+          "tn": 182
+        },
+        "semmai": {
+          "n": 627,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "far": 0.0,
+          "frr": 0.0,
+          "tp": 375,
+          "fp": 0,
+          "fn": 0,
+          "tn": 252
+        }
+      }
+    },
+    "thresholds": {
+      "tamil": 0.005,
+      "english": 0.6256
+    },
+    "per_kind": {
+      "AGGREGATION_SWAP": {
+        "n": 27,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "COLUMN_SWAP": {
+        "n": 40,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "CONSTRAINT_ADD": {
+        "n": 63,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "CONSTRAINT_DROP": {
+        "n": 53,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "DATE_DRIFT": {
+        "n": 6,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "ENTITY_SWAP": {
+        "n": 1,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "GOLD": {
+        "n": 126,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "GROUP_SWAP": {
+        "n": 6,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "LIMIT_CHANGE": {
+        "n": 5,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "LOGIC_AND_TO_OR": {
+        "n": 11,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "NEGATION_FLIP": {
+        "n": 26,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "OPERATOR_BOUNDARY": {
+        "n": 20,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "OPERATOR_REVERSE": {
+        "n": 25,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "ORDER_FLIP": {
+        "n": 12,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "PROJECTION_SWAP": {
+        "n": 41,
+        "label": 0,
+        "semmai": 1.0
+      },
+      "REWRITE_ALIASES": {
+        "n": 38,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_BOUNDARY_EQUIVALENT": {
+        "n": 6,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_COUNT_KEY": {
+        "n": 6,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_IN_SINGLE": {
+        "n": 16,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_LITERAL_LEFT": {
+        "n": 10,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_LOWERCASE": {
+        "n": 44,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "REWRITE_REORDER_CONDITIONS": {
+        "n": 6,
+        "label": 1,
+        "semmai": 1.0
+      },
+      "VALUE_DRIFT": {
+        "n": 39,
+        "label": 0,
+        "semmai": 1.0
+      }
+    }
+  },
+  "mistakes": {
+    "per_kind": {
+      "AFTER_BECOMES_FROM": {
+        "n": 6,
+        "caught": 6,
+        "silent_wrong": 6,
+        "harmless": 0
+      },
+      "FILTER_DROPPED": {
+        "n": 96,
+        "caught": 96,
+        "silent_wrong": 95,
+        "harmless": 1
+      },
+      "YEAR_SHIFTED": {
+        "n": 14,
+        "caught": 14,
+        "silent_wrong": 14,
+        "harmless": 0
+      },
+      "EXCEPT_DROPPED": {
+        "n": 12,
+        "caught": 12,
+        "silent_wrong": 12,
+        "harmless": 0
+      },
+      "NEGATION_LOST": {
+        "n": 12,
+        "caught": 12,
+        "silent_wrong": 12,
+        "harmless": 0
+      },
+      "MORE_THAN_BECOMES_AT_LEAST": {
+        "n": 16,
+        "caught": 16,
+        "silent_wrong": 9,
+        "harmless": 7
+      },
+      "NUMBER_CHANGED": {
+        "n": 33,
+        "caught": 33,
+        "silent_wrong": 33,
+        "harmless": 0
+      },
+      "AVERAGE_BECOMES_MAXIMUM": {
+        "n": 12,
+        "caught": 12,
+        "silent_wrong": 12,
+        "harmless": 0
+      },
+      "HIGHEST_BECOMES_LOWEST": {
+        "n": 12,
+        "caught": 12,
+        "silent_wrong": 12,
+        "harmless": 0
+      },
+      "TOP_K_CHANGED": {
+        "n": 8,
+        "caught": 8,
+        "silent_wrong": 8,
+        "harmless": 0
+      },
+      "BEFORE_BECOMES_UNTIL": {
+        "n": 2,
+        "caught": 2,
+        "silent_wrong": 1,
+        "harmless": 1
+      }
+    },
+    "total": {
+      "n": 223,
+      "caught": 223,
+      "silent_wrong": 214
+    }
+  },
+  "end_to_end": [
+    {
+      "p": 0.2,
+      "runs": 378,
+      "without_semmai": {
+        "correct": 0.8174603174603174,
+        "wrong": 0.18253968253968253
+      },
+      "with_semmai": {
+        "correct": 1.0,
+        "wrong": 0.0,
+        "blocked_attempts": 84,
+        "repaired": 2
+      }
+    },
+    {
+      "p": 0.4,
+      "runs": 378,
+      "without_semmai": {
+        "correct": 0.6296296296296297,
+        "wrong": 0.37037037037037035
+      },
+      "with_semmai": {
+        "correct": 1.0,
+        "wrong": 0.0,
+        "blocked_attempts": 213,
+        "repaired": 18
+      }
+    }
+  ]
+}
