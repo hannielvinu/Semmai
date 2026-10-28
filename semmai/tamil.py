@@ -378,8 +378,9 @@ class TamilParser:
         cs = self.concepts(toks)
         kept = []
         for c in cs:                         # "1000 ரூபாய்க்கு": the suffix belongs to the number
-            if c.kind == "MONEY" and kept and kept[-1].kind == "NUM" and not kept[-1].suffix:
-                kept[-1].suffix = c.suffix
+            if c.kind in ("MONEY", "YEARW") and kept and kept[-1].kind == "NUM" and not kept[-1].suffix \
+                    and c.suffix in ("க்கு", "க்கும்", "களுக்கு", "களுக்கும்", "உக்கு"):
+                kept[-1].suffix = "க்கு"
             if c.kind == "SCALE" and kept and kept[-1].kind == "NUM":
                 pass
             kept.append(c)
