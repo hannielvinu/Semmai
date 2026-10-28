@@ -36,6 +36,21 @@ plus up to three **semantic mutations** (label 0 = must be rejected).
 | `verification_handwritten.json` | 300 | 120 | 180 | test |
 | `verification_blind.json` | 398 | 160 | 238 | test |
 
+## Tamil (`tamil/`) and the HR database
+
+`bird_style/databases/hr/hr.sqlite` is built from the project story: 600 employees (name, gender,
+age, department, role, city, salary, join_date, experience_years) and 6 departments. Roles include
+Intern and Manager ("except interns", "delete everyone except managers"). With these joining dates,
+"joined after 2022" returns 170 people and "joined from 2022" returns 234.
+
+| File | Questions | Notes |
+|---|---|---|
+| `tamil/dev.json` | 48 | development |
+| `tamil/dev2.json` | 28 | development: mixed Tamil-English, Tamil number words, ₹, a suffix written as a separate word |
+| `tamil/blind_test.json` | 50 | **blind**: committed before any Tamil parser code existed; two numbers were adjusted before that, because the original values returned no rows |
+
+All are BIRD-format (`db_id`, `question`, `SQL`) over the hr, hospital, retail and university databases.
+
 ## 2. `massive_style/` - multilingual intents + slots (MASSIVE format)
 
 `massive_style.jsonl`: **1,595** utterances in **6 locales** (en-US, ta-IN, hi-IN, fr-FR, es-ES,

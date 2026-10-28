@@ -1,4 +1,4 @@
-# Semmai: A Neuro-Symbolic Semantic Verification Layer for LLM Agents
+# Semmai (செம்மை): A Neuro-Symbolic Semantic Verification Layer for Tamil and Multilingual LLM Agents
 
 **Project report** · Repository: <https://github.com/hannielvinu/Semmai>
 
@@ -30,6 +30,16 @@ French, Spanish, German), Semmai reaches **93.9% accuracy and 93.8% F1** versus 
 similarity. In an end-to-end agent simulation with a 20% LLM error rate, Semmai with
 regeneration raises correct answers from 80.8% to 97.6% and reduces silently wrong answers from
 19.2% to 0%. Verification takes about 2.5 ms per query on a laptop CPU.
+
+**Tamil.** Because the motivating use case is Tamil users talking to databases through an LLM, Semmai
+includes a Tamil semantic parser that reads Tamil directly (case suffixes, sandhi, postposition
+comparators such as *2022க்குப் பிறகு* "after 2022", negation such as *தவிர* "except", Tamil number words
+and *லட்சம்*) and a Tamil chatbot that shows every step of the pipeline. On a Tamil blind test set
+frozen before the parser was written, Semmai recovered the exact meaning of 98% of questions on the
+first run; it rejected every one of 223 realistic translation mistakes ("after" → "from", dropped
+"except", ...), 96% of which would otherwise have silently returned a wrong answer; and in an
+end-to-end simulation where the AI errs 20% of the time, wrong answers shown to the user fell from
+18.3% to 0%.
 
 ---
 
@@ -202,6 +212,40 @@ For tool actions `{"intent": …, "slots": {…}}` (MASSIVE format), `ToolVerifi
 times after a rejection. Generators are pluggable: `OllamaGenerator` (Qwen2.5-Coder via a local
 Ollama server) and `SimulatedLLM` (reproducible error injection, used in the experiments).
 
+### 3.8 Tamil semantic parser and chat pipeline
+
+Tamil is agglutinative and verb-final: meaning words carry case suffixes and comparison words come
+*after* the number (*2022க்குப் பிறகு சேர்ந்த ஊழியர்களைக் காட்டு* = "2022-DAT after joined employees-ACC show").
+`semmai/tamil.py` handles this without any training data:
+
+1. **Tokenisation**: numbers are split from glued suffixes (*2022க்கு* → 2022 + க்கு), sandhi consonants
+   are dropped (*ஊழியர்களைக்* → ஊழியர்களை), and Tamil number words and scales (*ஐம்பது ஆயிரம்*, *1 லட்சம்*) are read.
+2. **Suffix-aware lexicon matching**: a word matches a lexicon stem if the remainder is a plausible
+   Tamil suffix (*சென்னையைச்* = சென்னை + யை; *சம்பளத்தின்படி* = சம்பளம் + த்தின்படி; *கோயம்புத்தூரை*), while
+   look-alikes are rejected (*ஆண்* "male" vs *ஆண்டு* "year"). Multi-word entries (*குழுத் தலைவர்*,
+   *திருப்பி அனுப்பப்பட்ட*) are matched longest-first.
+3. **Concept grammar**: the comparator after a number decides the operator (*மேல்* >, *குறைவான* <,
+   *அல்லது அதற்கு மேல்* ≥, *பிறகு* after, *முதல்* from/since, *வரை* until, *இடையில்* between). Negation words after a
+   value (*தவிர*, *அல்லாத*, *இல்லாத*) negate it. Superlatives (*அதிக சம்பளம் வாங்கும் 5*) become ranking + limit,
+   *ஒவ்வொரு* / *வாரியாக* become grouping, and *நீக்கு* becomes a DELETE.
+4. **Meaning frame → English → USIG**: the frame is rendered as an English sentence (this doubles as the
+   built-in translator) and parsed into the USIG by the English intent extractor.
+
+The chat pipeline (`semmai/chat.py`) runs two independent paths for every Tamil question. On the
+**AI path**, a translator (built in, or IndicTrans2) produces English and an LLM (built in, Qwen2.5-Coder
+via Ollama, or any OpenAI-compatible API) writes SQL. On the **Semmai path**, the Tamil parser builds the
+user-intent graph. The proof engine compares the two. A mismatch blocks execution; the AI is asked
+again with the findings as feedback (up to three attempts), and if it still fails, Semmai compiles the
+SQL directly from the verified intent graph ("repair"). DELETE statements only ever run as a dry run.
+A **final check** compares the *output* intent with the *user* intent in three ways: the executed SQL's
+graph against the request graph; the answer against an answer computed independently from the intent
+graph; and the answer's shape (one number for a count, at most *k* rows for top-*k*).
+
+To demonstrate and measure this, the AI translator can be told to make realistic mistakes. These are
+implemented as edits to the meaning frame: "after" → "from", "before" → "until", dropped "except",
+lost negation, "more than" → "at least", changed numbers or years, dropped filters,
+highest ↔ lowest, a changed top-*k* and average → maximum.
+
 ## 4. Datasets
 
 The official BIRD and MASSIVE downloads were not reachable from the environment in which the
@@ -340,13 +384,47 @@ error with probability *p* (3 seeds, 1,035 runs per error rate).
 Rejection alone turns *silent wrong answers* into *explicit refusals*; adding regeneration turns
 most refusals back into correct answers.
 
-### 6.4 Targets
+### 6.4 Tamil
 
-| Target | SQL (blind) | Tools (6 languages) |
-|---|---|---|
-| Verification accuracy ≥ 90% | 97.0% ✅ | 93.9% ✅ |
-| F1-score ≥ 90% | 97.5% ✅ | 93.8% ✅ |
-| False acceptance rate ≤ 5% | 0.0% ✅ | 7.8% ✗ |
+**Data.** An HR database built from the project story (600 employees, 6 departments, with joining
+dates such that "after 2022" returns 170 people but "from 2022" returns 234), plus the hospital,
+retail and university databases. There are 126 Tamil questions with gold SQL: 48 + 28 for
+development (the second batch deliberately uses mixed Tamil-English, number words, ₹ and a suffix
+written as a separate word) and **50 blind questions**, committed to git before any parser code
+existed (`git log data/tamil/blind_test.json`).
+
+| Measure | Result |
+|---|---|
+| Exact meaning, development sets | 100% (48/48), 100% (28/28) |
+| Exact meaning, **blind set, first run** | **98.0% (49/50)** |
+| Verification of SQL against Tamil requests, blind set: accuracy / F1 / FAR / FRR | **100.0% / 100.0% / 0.0% / 0.0%** |
+| ... syntax + permission check | 40.2% / 0.0% / 100.0% / 0.0% |
+| ... similarity, Tamil question vs SQL meaning | 52.6% / 55.3% / 51.0% / 42.0% |
+| ... similarity, English translation vs SQL meaning | 61.8% / 64.2% / 43.0% / 31.0% |
+| Realistic translation mistakes caught | **223/223 (100%)**; 214 of them (96%) would have silently changed the answer |
+| End to end, AI wrong 20%: wrong answers shown | 18.3% → **0.0%** |
+| End to end, AI wrong 40%: wrong answers shown | 37.0% → **0.0%** |
+
+![Tamil results](../results/figures/tamil_results.png)
+
+Comparing a Tamil sentence with SQL by surface similarity is close to chance, because the scripts
+share almost no characters. Even after translation, similarity cannot tell "after 2022" from "from 2022".
+The explicit meaning graph can.
+
+*Caveats.* The end-to-end 0% assumes Semmai's own reading of the Tamil is right: when the Tamil parser
+misreads a question, Semmai blocks correct SQL (a false rejection) or, after repair, answers the
+misread question. On the blind set this happened for 1 of 50 questions on the first run. That one
+pattern (a comparison suffix on a unit word: *7 ஆண்டுகளுக்குக் குறைவான*) was fixed afterwards in a separate
+commit. The translation mistakes are simulated as edits to the meaning frame; IndicTrans2 and real
+LLMs are supported but could not be run in the build environment, which had no access to model downloads.
+
+### 6.5 Targets
+
+| Target | SQL (blind) | Tamil SQL (blind) | Tools (6 languages) |
+|---|---|---|---|
+| Verification accuracy ≥ 90% | 97.0% ✅ | 100.0% ✅ | 93.9% ✅ |
+| F1-score ≥ 90% | 97.5% ✅ | 100.0% ✅ | 93.8% ✅ |
+| False acceptance rate ≤ 5% | 0.0% ✅ | 0.0% ✅ | 7.8% ✗ |
 
 ## 7. Error analysis
 
@@ -425,6 +503,7 @@ silent wrong actions into explained rejections - and, with regeneration, into co
 * Rebedea, T., et al. (2023). NeMo Guardrails: A Toolkit for Controllable and Safe LLM Applications with Programmable Rails. *EMNLP 2023 (Demo)*.
 * Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. *EMNLP-IJCNLP 2019*.
 * Yu, T., et al. (2018). Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task. *EMNLP 2018*.
+* Gala, J., et al. (2023). IndicTrans2: Towards High-Quality and Accessible Machine Translation Models for all 22 Scheduled Indian Languages. *Transactions on Machine Learning Research*.
 * Zhong, R., Yu, T., & Klein, D. (2020). Semantic Evaluation for Text-to-SQL with Distilled Test Suites. *EMNLP 2020*.
 
 ## Appendix: reproducing the results
@@ -447,6 +526,7 @@ latency measurements vary).
 ### Running the demo
 
 The local demo needs only Python 3.9+ (standard library): double-click `start_demo.bat` on Windows,
-or run `python app/server.py`, and open <http://localhost:8000>. The multilingual intent model is
+or run `python app/server.py`, and open <http://localhost:8000> for the Tamil chatbot
+(<http://localhost:8000/lab> for the verifier lab and results). The multilingual intent model is
 exported to `models/intent_model.json` by `scripts/evaluate_tools.py` and evaluated in plain Python;
 its decisions are identical to the scikit-learn model on all 2,812 benchmark tool calls.
